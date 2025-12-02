@@ -68,6 +68,11 @@ def generate_workflow(
         dict: 生成结果，包含文件名和 Supabase URL（不含完整 workflow）
     """
     try:
+        # 调试日志
+        print(f"[generate_workflow] workflow_name={workflow_name}, user_id={user_id}")
+        print(f"[generate_workflow] steps count: {len(steps)}")
+        print(f"[generate_workflow] steps: {json.dumps(steps[:3] if len(steps) > 3 else steps, ensure_ascii=False)}")
+
         # 创建 workflow
         workflow = Workflow(workflow_name, description, lang=lang)
 
