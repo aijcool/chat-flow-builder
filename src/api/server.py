@@ -103,7 +103,8 @@ def get_agent(user_id: str = "public") -> ChatflowAgent:
             print(f"[get_agent] Using user API key for {user_id}")
             user_agents[cache_key] = ChatflowAgent(
                 api_key=user_api_key,
-                base_url="https://api.moonshot.cn/anthropic"  # Kimi API 兼容端点
+                base_url="https://api.moonshot.cn/anthropic",  # Kimi API 兼容端点
+                user_id=user_id
             )
         else:
             # 使用系统默认 API Key
@@ -111,7 +112,8 @@ def get_agent(user_id: str = "public") -> ChatflowAgent:
             config = get_config()
             user_agents[cache_key] = ChatflowAgent(
                 api_key=config.api_key,
-                base_url=config.base_url
+                base_url=config.base_url,
+                user_id=user_id
             )
 
     return user_agents[cache_key]

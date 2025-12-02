@@ -101,7 +101,8 @@ class ChatflowAgent:
         self,
         api_key: str,
         base_url: Optional[str] = None,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-4-20250514",
+        user_id: str = "public"
     ):
         """
         初始化 Agent
@@ -110,8 +111,10 @@ class ChatflowAgent:
             api_key: Anthropic API Key
             base_url: API Base URL (可选,用于兼容 API)
             model: 模型名称
+            user_id: 用户 ID (用于存储工作流)
         """
         self.model = model
+        self.user_id = user_id
 
         # 初始化 Anthropic 客户端
         client_kwargs = {"api_key": api_key}
@@ -148,6 +151,16 @@ class ChatflowAgent:
         Returns:
             str: 工具执行结果 (JSON 字符串，已简化，不含完整 workflow)
         """
+        # 自动注入 user_id 到需要的工具
+        tools_needing_user_id = [
+            "generate_workflow",
+            "save_workflow_to_file",
+            "list_workflow_files",
+            "load_workflow_file"
+        ]
+        if tool_name in tools_needing_user_id and "user_id" not in tool_input:
+            tool_input["user_id"] = self.user_id
+
         print(f"\n[调用工具] {tool_name}")
         print(f"[输入参数] {json.dumps(tool_input, ensure_ascii=False, indent=2)}")
 
