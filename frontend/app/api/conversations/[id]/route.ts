@@ -1,10 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+// 延迟初始化 Supabase 客户端
+let supabaseInstance: SupabaseClient | null = null
 
-const supabase = createClient(supabaseUrl, supabaseServiceKey)
+function getSupabase(): SupabaseClient {
+  if (!supabaseInstance) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Missing Supabase environment variables')
+    }
+
+    supabaseInstance = createClient(supabaseUrl, supabaseServiceKey)
+  }
+  return supabaseInstance
+}
 
 // 获取单个对话详情
 export async function GET(
@@ -20,7 +32,7 @@ export async function GET(
   }
 
   try {
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('conversations')
       .select('*')
       .eq('id', id)
@@ -64,7 +76,7 @@ export async function PUT(
       updateData.messages = messages
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('conversations')
       .update(updateData)
       .eq('id', id)
@@ -95,7 +107,7 @@ export async function DELETE(
   }
 
   try {
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('conversations')
       .delete()
       .eq('id', id)

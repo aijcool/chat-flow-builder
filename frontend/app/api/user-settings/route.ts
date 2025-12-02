@@ -1,10 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+// 延迟初始化 Supabase 客户端
+let supabaseInstance: SupabaseClient | null = null
 
-const supabase = createClient(supabaseUrl, supabaseServiceKey)
+function getSupabase(): SupabaseClient {
+  if (!supabaseInstance) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Missing Supabase environment variables')
+    }
+
+    supabaseInstance = createClient(supabaseUrl, supabaseServiceKey)
+  }
+  return supabaseInstance
+}
 
 // 获取用户设置
 export async function GET(request: NextRequest) {
@@ -16,7 +28,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('user_settings')
       .select('api_key')
       .eq('user_id', userId)
@@ -47,7 +59,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // 使用 upsert 来插入或更新
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('user_settings')
       .upsert({
         user_id,
