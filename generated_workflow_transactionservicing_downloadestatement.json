@@ -1,0 +1,3629 @@
+{
+  "created_by": "HSBC",
+  "modified_by": "chenyu.zhu@brgroup.com",
+  "flow_uuid": "91a39201-39f6-4cc8-80d3-2ae51dd91d03",
+  "start_node_uuid": "start00000000000000000000",
+  "intention_uuid": "a8ed1270-13c4-47b9-8350-47b0723562cc",
+  "flow_name": "transactionservicing_downloadestatement",
+  "description": "TXNAndSTMT_Deeplink 工作流",
+  "nodes": [
+    {
+      "id": "start00000000000000000000",
+      "type": "start",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 325
+      },
+      "data": {
+        "label": "Start",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "59b0be9a-6941-4ddd-a9f4-aa04fad62a19",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 425
+      },
+      "data": {
+        "sourceHandle": "a1fd6312-bb8e-462f-ac41-63616d56a374",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "b6e96e97-fba6-4d09-8265-b7f70912740a",
+      "hidden": true,
+      "config": {
+        "title": "Set Parameters before transition (TransactionServicing_DownloadEstatement)",
+        "desc": "",
+        "code": "def main(user_utterance) -> dict:\n    delay = 2\n    journeyIntent = user_utterance\n    return {\n        \"delay\": delay,\n        \"journeyIntent\": journeyIntent,\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "delay",
+            "type": "string",
+            "variable_assign": "delay"
+          },
+          {
+            "name": "journeyIntent",
+            "type": "string",
+            "variable_assign": "journeyIntent"
+          }
+        ],
+        "args": [
+          {
+            "name": "user_utterance",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"user_utterance\" data-name=\"{{user_utterance}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{user_utterance}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b6e96e97-fba6-4d09-8265-b7f70912740a",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 475,
+        "y": 275
+      },
+      "data": {
+        "label": "Set Parameters before transition (TransactionServicing_DownloadEstatement)",
+        "include_node_ids": [
+          "59b0be9a-6941-4ddd-a9f4-aa04fad62a19"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "e61344db-9253-4a2d-91a7-e3e127887fac",
+      "type": "jump",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 625
+      },
+      "data": {
+        "sourceHandle": "99d98534-930a-4d15-8b0a-8e4d90d10e47",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "da7ab8ec-5584-476d-958e-f2bddc3cf7e2",
+      "hidden": true,
+      "config": {
+        "jump_type": "flow",
+        "jump_robot_id": "",
+        "jump_robot_name": "",
+        "jump_carry_histories": false,
+        "jump_carry_history_number": 5,
+        "jump_flow_name": "JumpTo_Common_EAT_CRC",
+        "jump_flow_uuid": "ebd20f44-2aba-424c-8d06-adaa0d07841f",
+        "jump_carry_userinput": true,
+        "title": "jump_to_JumpTo_Common_EAT_CRC"
+      }
+    },
+    {
+      "id": "da7ab8ec-5584-476d-958e-f2bddc3cf7e2",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 9575,
+        "y": 1060
+      },
+      "data": {
+        "label": "jump_to_JumpTo_Common_EAT_CRC",
+        "include_node_ids": [
+          "e61344db-9253-4a2d-91a7-e3e127887fac"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "c7bc7209-4cb4-4bbd-bab1-c1f979ad21f8",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 825
+      },
+      "data": {
+        "sourceHandle": "666f1fb7-c4a9-4f6b-98b9-1b7d40af34cd",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "46e9772c-75ad-4448-bed8-749ec00662ae",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'Which account would you like to get a statement for?', 'type': 'message'}",
+            "id": "21264014-a92d-4efd-83ac-41490a0124e2"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-1_TXNAndSTMT_DownloadEstatement"
+      }
+    },
+    {
+      "id": "46e9772c-75ad-4448-bed8-749ec00662ae",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 825,
+        "y": 275
+      },
+      "data": {
+        "label": "Response_TS-DE-1_TXNAndSTMT_DownloadEstatement",
+        "include_node_ids": [
+          "c7bc7209-4cb4-4bbd-bab1-c1f979ad21f8"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "ccd4354f-fb99-4239-8500-bad6e11aa445",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 1025
+      },
+      "data": {
+        "sourceHandle": "7e3c831c-90be-4218-94fd-908840d69efc",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "b7abbae8-8905-490a-b3e3-0d95fb4285ef",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'buttons': ['Passbook Savings account with a 10-digit account number', 'Other accounts', 'Credit card', 'Mortgage'], 'type': 'buttonList'}",
+            "id": "a8812f63-d37e-4efa-95b9-7fc5732b05ed"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-1_TXNAndSTMT_DownloadEstatement"
+      }
+    },
+    {
+      "id": "b7abbae8-8905-490a-b3e3-0d95fb4285ef",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 1175,
+        "y": 275
+      },
+      "data": {
+        "label": "Response_TS-DE-1_TXNAndSTMT_DownloadEstatement",
+        "include_node_ids": [
+          "ccd4354f-fb99-4239-8500-bad6e11aa445"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "018ae9c8-c4b8-4868-ba8f-b74e185f25f8",
+      "type": "captureUserReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 1225
+      },
+      "data": {
+        "sourceHandle": "a5c97772-9462-4e9e-80de-f00d0522a93a",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ff47819b-906f-4342-86d0-2c7fd3392a93",
+      "hidden": true,
+      "config": {
+        "variable_assign": "last_user_response",
+        "title": "Capture User Input"
+      }
+    },
+    {
+      "id": "ff47819b-906f-4342-86d0-2c7fd3392a93",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 1525,
+        "y": 275
+      },
+      "data": {
+        "label": "Capture User Input",
+        "include_node_ids": [
+          "018ae9c8-c4b8-4868-ba8f-b74e185f25f8"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "8322ccba-e079-4e14-a2d2-94b208eb9b6b",
+      "type": "knowledgeAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 1425
+      },
+      "data": {
+        "sourceHandle": "7e6028ed-cd20-41a4-8587-712736c9a39a",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "40190de8-32a7-4470-8f12-b27725c15235",
+      "hidden": true,
+      "config": {
+        "title": "Knowledge Base Retrieval",
+        "variable_assign": "variable_11",
+        "rag_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 1,
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "knowledge_base_ids": [
+            4993
+          ],
+          "ai_tag_list": [],
+          "knowledge_search_flag": true,
+          "keyword_enable": false,
+          "keywords": ""
+        },
+        "desc": "Knowledge Base Retrieval"
+      }
+    },
+    {
+      "id": "40190de8-32a7-4470-8f12-b27725c15235",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 1875,
+        "y": 330
+      },
+      "data": {
+        "label": "Knowledge Base Retrieval",
+        "include_node_ids": [
+          "8322ccba-e079-4e14-a2d2-94b208eb9b6b"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "55308c00-1257-4913-a5df-c8152b5321ed",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 1625
+      },
+      "data": {
+        "sourceHandle": "68b07519-f5d2-49af-9ac4-c2e7ae37ad72",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "2d65a86b-a0e1-4f75-8dea-6e9850cc8aca",
+      "hidden": true,
+      "config": {
+        "title": "Extract Intent from RAG",
+        "desc": "",
+        "code": "import re\ndef main(variable_11) -> dict:\n    match = re.search(r\"A:(.*)\", variable_11)\n    if match:\n        result = match.group(1).strip()\n    else:\n        result = \"unknown\"\n    return {\n        \"intent\": result\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "intent",
+            "type": "string",
+            "variable_assign": "intent"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_11",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_11\" data-name=\"{{variable_11}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_11}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2d65a86b-a0e1-4f75-8dea-6e9850cc8aca",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 2225,
+        "y": 330
+      },
+      "data": {
+        "label": "Extract Intent from RAG",
+        "include_node_ids": [
+          "55308c00-1257-4913-a5df-c8152b5321ed"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "422d37a6-c047-4530-a54d-db0012375f5d",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 1825
+      },
+      "data": {
+        "sourceHandle": "3db36f85-9a78-4713-b734-f6153619a630",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "400e6f3d-919e-46bb-bc92-267089dfae5f",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'I didn't get that. Can you repeat?', 'type': 'message'}",
+            "id": "fallback_text_961176e5_82"
+          }
+        ],
+        "rich_text": [],
+        "title": "Fallback Message"
+      }
+    },
+    {
+      "id": "400e6f3d-919e-46bb-bc92-267089dfae5f",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 3975,
+        "y": 75
+      },
+      "data": {
+        "label": "Fallback Message",
+        "include_node_ids": [
+          "422d37a6-c047-4530-a54d-db0012375f5d"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "06102da1-2a06-4f65-b326-6a43cdbedb83",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 2025
+      },
+      "data": {
+        "sourceHandle": "cad1aa43-b9b4-4280-a49b-3c3efe4e7038",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "39e38553-3d90-4912-82b6-a7470132a55a",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Is TXNAndSTMT_DownloadEstatement_AccountName",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "TXNAndSTMT_DownloadEstatement_AccountName",
+                "condition_variable": "intent"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "84c18f67-2ec5-4a1d-b9a0-abe70a6fb227"
+          },
+          {
+            "condition_name": "Not TXNAndSTMT_DownloadEstatement_AccountName",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "4bdc7f03-b69d-4de2-91e2-95eabe84dd15"
+          }
+        ],
+        "title": "Check if Intent is TXNAndSTMT_DownloadEstatement_AccountName"
+      }
+    },
+    {
+      "id": "39e38553-3d90-4912-82b6-a7470132a55a",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 2575,
+        "y": 330
+      },
+      "data": {
+        "label": "Check if Intent is TXNAndSTMT_DownloadEstatement_AccountName",
+        "include_node_ids": [
+          "06102da1-2a06-4f65-b326-6a43cdbedb83"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "is_TXNAndSTMT_DownloadEstatement_AccountName": "84c18f67-2ec5-4a1d-b9a0-abe70a6fb227",
+        "not_TXNAndSTMT_DownloadEstatement_AccountName": "4bdc7f03-b69d-4de2-91e2-95eabe84dd15"
+      }
+    },
+    {
+      "id": "8d7bae73-0730-4622-9962-5643b4a30a23",
+      "type": "llmVariableAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 2225
+      },
+      "data": {
+        "sourceHandle": "e642e49e-fda3-4385-ae4c-507fee705d2c",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "3bad51d7-2659-4147-bca3-48de27b7dc02",
+      "hidden": true,
+      "config": {
+        "title": "Extract Parameters for TXNAndSTMT_DownloadEstatement_AccountName",
+        "prompt_template": "#Role\nYou are an information extraction specialist. Your task is to extract parameters from the user's reply.\n\n##User Input\n{{last_user_response}}\n\n##Output Template\n{\n  \"DE_AccountName\": \"\",\n}\n\n##Instructions\nExtract the required parameters from user input and return in JSON format. If a parameter is not found, use empty string.\n\n##Hints (Use one of the allowed values for each parameter)\n- DE_AccountName: allowed values (en) = Passbook Savings account with a  10-digit account number, Credit card, Other accounts, Mortgage\n",
+        "variable_assign": "variable_12",
+        "llm_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 3,
+          "divergence": 2,
+          "prompt": "",
+          "llm_name": "azure-gpt-4o",
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "rag_enabled": "",
+          "knowledge_base_ids": [],
+          "ai_tag_list": [],
+          "knowledge_search_flag": false,
+          "chat_history_flag": true,
+          "chat_history_count": 3,
+          "ltm_enabled": false,
+          "ltm_search_range": "0",
+          "ltm_robot_ids": [],
+          "ltm_question": "",
+          "ltm_recall_count": 5
+        },
+        "desc": "Extract Parameters for TXNAndSTMT_DownloadEstatement_AccountName"
+      }
+    },
+    {
+      "id": "3bad51d7-2659-4147-bca3-48de27b7dc02",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 2925,
+        "y": 385
+      },
+      "data": {
+        "label": "Extract Parameters for TXNAndSTMT_DownloadEstatement_AccountName",
+        "include_node_ids": [
+          "8d7bae73-0730-4622-9962-5643b4a30a23"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "6c0627fa-b1b8-4664-a9d9-930e15af94b5",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 2425
+      },
+      "data": {
+        "sourceHandle": "7f73a87e-750d-4758-acef-912b641ae616",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "2809edb2-d264-482e-97fc-4caaf6df236f",
+      "hidden": true,
+      "config": {
+        "title": "Parse Parameters for TXNAndSTMT_DownloadEstatement_AccountName",
+        "desc": "",
+        "code": "import re\n\ndef main(variable_12) -> dict:\n    # 提取JSON\n    json_match = re.findall(r'\\{.*\\}', variable_12, re.DOTALL)\n    if not json_match:\n        return {}\n    \n    json_str = json_match[0]\n    json_str = json_str.replace('null', '\"None\"').replace(\"Null\", '\"None\"')\n    \n    try:\n        result = eval(json_str)\n        return result\n    except:\n        return {}\n",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "DE_AccountName",
+            "type": "string",
+            "variable_assign": "DE_AccountName"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_12",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_12\" data-name=\"{{variable_12}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_12}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2809edb2-d264-482e-97fc-4caaf6df236f",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 3275,
+        "y": 385
+      },
+      "data": {
+        "label": "Parse Parameters for TXNAndSTMT_DownloadEstatement_AccountName",
+        "include_node_ids": [
+          "6c0627fa-b1b8-4664-a9d9-930e15af94b5"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "a68e8f57-3220-4f4d-ac7e-ef3804eb0f9b",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 2625
+      },
+      "data": {
+        "sourceHandle": "2139c019-5e9c-491c-bae5-1ba3fa673e59",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "1ab24524-1be2-462a-acad-3550503762b8",
+      "hidden": true,
+      "config": {
+        "title": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "desc": "",
+        "code": "\n        def main() -> dict:\n            # 执行用户代码\n                SkillSet = \"Banking\"\n            \n            # 返回所有输出变量\n            return {\n        \"SkillSet\": SkillSet\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "SkillSet",
+            "type": "string",
+            "variable_assign": "SkillSet"
+          }
+        ],
+        "args": []
+      }
+    },
+    {
+      "id": "1ab24524-1be2-462a-acad-3550503762b8",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 3975,
+        "y": 275
+      },
+      "data": {
+        "label": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "include_node_ids": [
+          "a68e8f57-3220-4f4d-ac7e-ef3804eb0f9b"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "deb92c70-96b2-4a99-b012-9e196d337b1e",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 2825
+      },
+      "data": {
+        "sourceHandle": "b52eca10-ba0d-4ee0-90e5-5d548347bf3f",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ae00cf42-5519-4057-940d-3fa656375c83",
+      "hidden": true,
+      "config": {
+        "title": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "desc": "",
+        "code": "\n        def main() -> dict:\n            # 执行用户代码\n                SkillSet = \"Mortgage\"\n            \n            # 返回所有输出变量\n            return {\n        \"SkillSet\": SkillSet\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "SkillSet",
+            "type": "string",
+            "variable_assign": "SkillSet"
+          }
+        ],
+        "args": []
+      }
+    },
+    {
+      "id": "ae00cf42-5519-4057-940d-3fa656375c83",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 3975,
+        "y": 950
+      },
+      "data": {
+        "label": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "include_node_ids": [
+          "deb92c70-96b2-4a99-b012-9e196d337b1e"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "2cb40cc0-16ad-436d-b1ba-e9af21231c3a",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 3025
+      },
+      "data": {
+        "sourceHandle": "d76dd210-b85f-4fb9-8670-d405c7248f22",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "782decec-c8c8-4a48-8257-0bbb7dc12b91",
+      "hidden": true,
+      "config": {
+        "title": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "desc": "",
+        "code": "\n        def main() -> dict:\n            # 执行用户代码\n                SkillSet = \"Card\"\n            \n            # 返回所有输出变量\n            return {\n        \"SkillSet\": SkillSet\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "SkillSet",
+            "type": "string",
+            "variable_assign": "SkillSet"
+          }
+        ],
+        "args": []
+      }
+    },
+    {
+      "id": "782decec-c8c8-4a48-8257-0bbb7dc12b91",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7475,
+        "y": 585
+      },
+      "data": {
+        "label": "Set Parameters (TXNAndSTMT_DownloadEstatement_AccountName)",
+        "include_node_ids": [
+          "2cb40cc0-16ad-436d-b1ba-e9af21231c3a"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "9cfcf7c9-f232-4040-ba56-1f31980e37f4",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 3225
+      },
+      "data": {
+        "sourceHandle": "e2def217-b200-47ff-b4dd-739dfec3035c",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "917b988c-1126-468c-83e5-43361516b77c",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_AccountName: Passbook_Savings_acc...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "Passbook Savings account with a  10-digit account number",
+                "condition_variable": "DE_AccountName"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "5a51338a-2028-4c7b-b31e-e89a3a82f89f"
+          },
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_AccountName: Mortgage...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "Mortgage",
+                "condition_variable": "DE_AccountName"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "b3671552-0f4d-423f-9bfe-a772f6b8a1d7"
+          },
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_AccountName: Credit_card...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "Credit card",
+                "condition_variable": "DE_AccountName"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "074130e5-db43-435b-ac89-c895c76ba81e"
+          },
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_AccountName: Other_accounts...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "Other accounts",
+                "condition_variable": "DE_AccountName"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "ef749b70-79a8-4a05-b59d-335245887c6b"
+          },
+          {
+            "condition_name": "Parameter Fallback",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "4ccee3d6-562b-4831-8c0e-2aaf76721e3b"
+          }
+        ],
+        "title": "Parameter Routing for TXNAndSTMT_DownloadEstatement_AccountName"
+      }
+    },
+    {
+      "id": "917b988c-1126-468c-83e5-43361516b77c",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 3625,
+        "y": 385
+      },
+      "data": {
+        "label": "Parameter Routing for TXNAndSTMT_DownloadEstatement_AccountName",
+        "include_node_ids": [
+          "9cfcf7c9-f232-4040-ba56-1f31980e37f4"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "param_TXNAndSTMT_DownloadEstatement_AccountName_1": "5a51338a-2028-4c7b-b31e-e89a3a82f89f",
+        "param_TXNAndSTMT_DownloadEstatement_AccountName_2": "b3671552-0f4d-423f-9bfe-a772f6b8a1d7",
+        "param_TXNAndSTMT_DownloadEstatement_AccountName_3": "074130e5-db43-435b-ac89-c895c76ba81e",
+        "param_TXNAndSTMT_DownloadEstatement_AccountName_4": "ef749b70-79a8-4a05-b59d-335245887c6b",
+        "param_fallback_TXNAndSTMT_DownloadEstatement_AccountName": "4ccee3d6-562b-4831-8c0e-2aaf76721e3b"
+      }
+    },
+    {
+      "id": "b7beaa6d-89bb-4497-a299-73549c0c9d57",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 3425
+      },
+      "data": {
+        "sourceHandle": "dc41c17c-4377-4aad-b84a-7dcc63e08621",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "2ad8ed9e-2f54-46e5-9007-ba2130b22549",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': \"After you've registered for eStatements and eAdvice, we'll issue an eStatement when transactions are consolidated as Net Back Items.\", 'type': 'message'}",
+            "id": "76dbf995-83cb-4f94-a88a-4fc3c0afd488"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-2_DE_SavingAccount"
+      }
+    },
+    {
+      "id": "2ad8ed9e-2f54-46e5-9007-ba2130b22549",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 4325,
+        "y": 275
+      },
+      "data": {
+        "label": "Response_TS-DE-2_DE_SavingAccount",
+        "include_node_ids": [
+          "b7beaa6d-89bb-4497-a299-73549c0c9d57"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "3e445e6f-fe1e-4f92-8c57-b3b80afb7228",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 3625
+      },
+      "data": {
+        "sourceHandle": "e4034d60-4d89-4830-a913-a21ea53fde96",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "b84c4d72-edb0-4518-a55f-b604a4110a60",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'buttons': ['Download eStatement'], 'type': 'additionalQuestions'}",
+            "id": "9ac9a219-ffec-4319-9615-4c40763042e9"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-2_DE_SavingAccount"
+      }
+    },
+    {
+      "id": "b84c4d72-edb0-4518-a55f-b604a4110a60",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 4675,
+        "y": 275
+      },
+      "data": {
+        "label": "Response_TS-DE-2_DE_SavingAccount",
+        "include_node_ids": [
+          "3e445e6f-fe1e-4f92-8c57-b3b80afb7228"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "283edc86-258e-4a52-915d-f169ab65bcff",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 3825
+      },
+      "data": {
+        "sourceHandle": "204fff8c-b35e-40a2-960f-b8e6c4a8419b",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ddd98971-81ce-4a2f-928e-0aea2861e155",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'followUp': 'true', 'text': 'Can I help you with anything else?', 'type': 'message'}",
+            "id": "c7246da3-f82b-40ab-903a-654e2ff27761"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-2_DE_SavingAccount"
+      }
+    },
+    {
+      "id": "ddd98971-81ce-4a2f-928e-0aea2861e155",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5025,
+        "y": 275
+      },
+      "data": {
+        "label": "Response_TS-DE-2_DE_SavingAccount",
+        "include_node_ids": [
+          "283edc86-258e-4a52-915d-f169ab65bcff"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "6cbcf706-895b-4034-8901-cd044e02239b",
+      "type": "captureUserReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 4025
+      },
+      "data": {
+        "sourceHandle": "416f39db-902f-499d-b593-e0489e8adb7c",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "55776215-6562-4dd2-9411-7b4b34963e52",
+      "hidden": true,
+      "config": {
+        "variable_assign": "last_user_response",
+        "title": "Capture User Input"
+      }
+    },
+    {
+      "id": "55776215-6562-4dd2-9411-7b4b34963e52",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5375,
+        "y": 275
+      },
+      "data": {
+        "label": "Capture User Input",
+        "include_node_ids": [
+          "6cbcf706-895b-4034-8901-cd044e02239b"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "d9c08eb1-7bbb-4760-8aba-96d4b55a7ce3",
+      "type": "knowledgeAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 4225
+      },
+      "data": {
+        "sourceHandle": "d92da5a8-a3d5-4f52-9bbf-57cf2b002f0f",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "37dfc1ec-8306-42a4-8287-37c58f4902d5",
+      "hidden": true,
+      "config": {
+        "title": "Knowledge Base Retrieval",
+        "variable_assign": "variable_14",
+        "rag_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 1,
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "knowledge_base_ids": [
+            4993
+          ],
+          "ai_tag_list": [],
+          "knowledge_search_flag": true,
+          "keyword_enable": false,
+          "keywords": ""
+        },
+        "desc": "Knowledge Base Retrieval"
+      }
+    },
+    {
+      "id": "37dfc1ec-8306-42a4-8287-37c58f4902d5",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5725,
+        "y": 330
+      },
+      "data": {
+        "label": "Knowledge Base Retrieval",
+        "include_node_ids": [
+          "d9c08eb1-7bbb-4760-8aba-96d4b55a7ce3"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "7f3c9803-b5fd-4f14-af9f-ac94653db7cf",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 4425
+      },
+      "data": {
+        "sourceHandle": "f6fe0842-4647-4c3e-b848-320d8dcbcd48",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "b7e4c0cb-eb9c-4f99-8703-8f0295aef21d",
+      "hidden": true,
+      "config": {
+        "title": "Extract Intent from RAG",
+        "desc": "",
+        "code": "import re\ndef main(variable_14) -> dict:\n    match = re.search(r\"A:(.*)\", variable_14)\n    if match:\n        result = match.group(1).strip()\n    else:\n        result = \"unknown\"\n    return {\n        \"intent\": result\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "intent",
+            "type": "string",
+            "variable_assign": "intent"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_14",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_14\" data-name=\"{{variable_14}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_14}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b7e4c0cb-eb9c-4f99-8703-8f0295aef21d",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6075,
+        "y": 330
+      },
+      "data": {
+        "label": "Extract Intent from RAG",
+        "include_node_ids": [
+          "7f3c9803-b5fd-4f14-af9f-ac94653db7cf"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "35a1d35a-3297-42f4-83bb-a420a9ec9b6c",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 4625
+      },
+      "data": {
+        "sourceHandle": "7e56f941-d2c9-4239-b75e-472338486c01",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "c3983627-7334-4d90-85f7-f3d79af393f9",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'I didn't get that. Can you repeat?', 'type': 'message'}",
+            "id": "fallback_text_8620fd91_96"
+          }
+        ],
+        "rich_text": [],
+        "title": "Fallback Message"
+      }
+    },
+    {
+      "id": "c3983627-7334-4d90-85f7-f3d79af393f9",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7825,
+        "y": 220
+      },
+      "data": {
+        "label": "Fallback Message",
+        "include_node_ids": [
+          "35a1d35a-3297-42f4-83bb-a420a9ec9b6c"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "22aed077-0a7f-4938-ac59-5a5b30881694",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 4825
+      },
+      "data": {
+        "sourceHandle": "b70becd7-3667-467f-896e-d1e6695caefc",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "1d4cb4fc-ae40-42ba-8626-fd74509f6ed0",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Is TXNAndSTMT_DownloadEstatement_SavingAccount",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "TXNAndSTMT_DownloadEstatement_SavingAccount",
+                "condition_variable": "intent"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "cabd2862-5d80-4e4d-ad00-4b570b22f059"
+          },
+          {
+            "condition_name": "Not TXNAndSTMT_DownloadEstatement_SavingAccount",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "2999cf35-020d-4d5b-89cb-fa3c8789c4e0"
+          }
+        ],
+        "title": "Check if Intent is TXNAndSTMT_DownloadEstatement_SavingAccount"
+      }
+    },
+    {
+      "id": "1d4cb4fc-ae40-42ba-8626-fd74509f6ed0",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6425,
+        "y": 330
+      },
+      "data": {
+        "label": "Check if Intent is TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "include_node_ids": [
+          "22aed077-0a7f-4938-ac59-5a5b30881694"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "is_TXNAndSTMT_DownloadEstatement_SavingAccount": "cabd2862-5d80-4e4d-ad00-4b570b22f059",
+        "not_TXNAndSTMT_DownloadEstatement_SavingAccount": "2999cf35-020d-4d5b-89cb-fa3c8789c4e0"
+      }
+    },
+    {
+      "id": "8b4a98d2-3a38-4795-b93f-f74489a1e375",
+      "type": "llmVariableAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 5025
+      },
+      "data": {
+        "sourceHandle": "cddcc89b-e86b-4e82-970d-6fe26187078b",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "3b72728d-bb77-49c4-ab00-872baf11a5a4",
+      "hidden": true,
+      "config": {
+        "title": "Extract Parameters for TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "prompt_template": "#Role\nYou are an information extraction specialist. Your task is to extract parameters from the user's reply.\n\n##User Input\n{{last_user_response}}\n\n##Output Template\n{\n  \"DE_SavingAccount\": \"\",\n}\n\n##Instructions\nExtract the required parameters from user input and return in JSON format. If a parameter is not found, use empty string.\n\n##Hints (Use one of the allowed values for each parameter)\n- DE_SavingAccount: allowed values (en) = Download eStatement\n",
+        "variable_assign": "variable_15",
+        "llm_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 3,
+          "divergence": 2,
+          "prompt": "",
+          "llm_name": "azure-gpt-4o",
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "rag_enabled": "",
+          "knowledge_base_ids": [],
+          "ai_tag_list": [],
+          "knowledge_search_flag": false,
+          "chat_history_flag": true,
+          "chat_history_count": 3,
+          "ltm_enabled": false,
+          "ltm_search_range": "0",
+          "ltm_robot_ids": [],
+          "ltm_question": "",
+          "ltm_recall_count": 5
+        },
+        "desc": "Extract Parameters for TXNAndSTMT_DownloadEstatement_SavingAccount"
+      }
+    },
+    {
+      "id": "3b72728d-bb77-49c4-ab00-872baf11a5a4",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6775,
+        "y": 385
+      },
+      "data": {
+        "label": "Extract Parameters for TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "include_node_ids": [
+          "8b4a98d2-3a38-4795-b93f-f74489a1e375"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "49f12473-ff25-4865-99bb-935cc8b11b6d",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 5225
+      },
+      "data": {
+        "sourceHandle": "61040056-52c8-4ef1-98f1-f7c77ebb787d",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "84977f53-1562-4171-865e-95b9bfc17564",
+      "hidden": true,
+      "config": {
+        "title": "Parse Parameters for TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "desc": "",
+        "code": "import re\n\ndef main(variable_15) -> dict:\n    # 提取JSON\n    json_match = re.findall(r'\\{.*\\}', variable_15, re.DOTALL)\n    if not json_match:\n        return {}\n    \n    json_str = json_match[0]\n    json_str = json_str.replace('null', '\"None\"').replace(\"Null\", '\"None\"')\n    \n    try:\n        result = eval(json_str)\n        return result\n    except:\n        return {}\n",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "DE_SavingAccount",
+            "type": "string",
+            "variable_assign": "DE_SavingAccount"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_15",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_15\" data-name=\"{{variable_15}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_15}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "84977f53-1562-4171-865e-95b9bfc17564",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7125,
+        "y": 385
+      },
+      "data": {
+        "label": "Parse Parameters for TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "include_node_ids": [
+          "49f12473-ff25-4865-99bb-935cc8b11b6d"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "38215ddb-76dd-46a2-a9e3-e4deca30ca8f",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 5425
+      },
+      "data": {
+        "sourceHandle": "885f6bae-403f-4ab2-879a-e1c5d59fefac",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "f7e52b59-ac64-4f2f-bf8d-524a70418399",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_SavingAccount: Download_eStatement...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "Download eStatement",
+                "condition_variable": "DE_SavingAccount"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "5e790c6a-f1cd-4565-a933-5c85053cd654"
+          },
+          {
+            "condition_name": "Parameter Fallback",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "8af028f0-882c-4857-9abd-767de5b03810"
+          }
+        ],
+        "title": "Parameter Routing for TXNAndSTMT_DownloadEstatement_SavingAccount"
+      }
+    },
+    {
+      "id": "f7e52b59-ac64-4f2f-bf8d-524a70418399",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7475,
+        "y": 385
+      },
+      "data": {
+        "label": "Parameter Routing for TXNAndSTMT_DownloadEstatement_SavingAccount",
+        "include_node_ids": [
+          "38215ddb-76dd-46a2-a9e3-e4deca30ca8f"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "param_TXNAndSTMT_DownloadEstatement_SavingAccount_1": "5e790c6a-f1cd-4565-a933-5c85053cd654",
+        "param_fallback_TXNAndSTMT_DownloadEstatement_SavingAccount": "8af028f0-882c-4857-9abd-767de5b03810"
+      }
+    },
+    {
+      "id": "7d3ab75d-1859-4478-aabd-7e20e2794e7f",
+      "type": "jump",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 5625
+      },
+      "data": {
+        "sourceHandle": "43db2b2e-2108-42ea-b8fa-7d68c0b42def",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "1393e924-589c-4323-91be-cc5a4d04f81a",
+      "hidden": true,
+      "config": {
+        "jump_type": "flow",
+        "jump_robot_id": "",
+        "jump_robot_name": "",
+        "jump_carry_histories": false,
+        "jump_carry_history_number": 5,
+        "jump_flow_name": "JumpTo_Common_EAT_CRC",
+        "jump_flow_uuid": "ebd20f44-2aba-424c-8d06-adaa0d07841f",
+        "jump_carry_userinput": true,
+        "title": "jump_to_JumpTo_Common_EAT_CRC"
+      }
+    },
+    {
+      "id": "1393e924-589c-4323-91be-cc5a4d04f81a",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 9225,
+        "y": 530
+      },
+      "data": {
+        "label": "jump_to_JumpTo_Common_EAT_CRC",
+        "include_node_ids": [
+          "7d3ab75d-1859-4478-aabd-7e20e2794e7f"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "19fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 5825
+      },
+      "data": {
+        "sourceHandle": "bc1d2fc3-cadf-495e-9c1f-6e0cd82808f0",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': \"Please go to 'eStatements and eAdvice' and select the account, period, and document type to check your eStatement.\", 'type': 'message'}",
+            "id": "5d502010-a7c0-4d07-926d-3d3b9759aab2"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-3_CreditCard"
+      }
+    },
+    {
+      "id": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7825,
+        "y": 530
+      },
+      "data": {
+        "label": "Response_TS-DE-3_CreditCard",
+        "include_node_ids": [
+          "19fdf8c3-ff11-440c-aa5e-72b3ca4e53c9"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "1e68870f-db5c-4aea-a738-847541df2294",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 6025
+      },
+      "data": {
+        "sourceHandle": "6035a20d-b7a0-4e6d-bbec-aaad9bd10a53",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "6f2856b7-75e5-4c53-8ac6-76942d9dcfb9",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'delay': '<span class=\"rich-mention__span\" data-id=\"delay\" data-name=\"{{delay}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{delay}}</span>', 'type': 'delay', 'typing': False}",
+            "id": "75f4a182-e10d-4688-9255-617f4133582a"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-3_CreditCard"
+      }
+    },
+    {
+      "id": "6f2856b7-75e5-4c53-8ac6-76942d9dcfb9",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8175,
+        "y": 530
+      },
+      "data": {
+        "label": "Response_TS-DE-3_CreditCard",
+        "include_node_ids": [
+          "1e68870f-db5c-4aea-a738-847541df2294"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "87a066f3-cb5b-4406-bf81-fb1da3d98f75",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 6225
+      },
+      "data": {
+        "sourceHandle": "79892ee1-c853-4b4d-b538-8d535319cfeb",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ad2d0d23-b92b-45c8-915c-17bc80a7db2a",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'If you want to download or save the eStatement, select the icon in the top right corner.', 'type': 'message'}",
+            "id": "0a156524-908c-4ca7-aad0-1812b10006ba"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-3_CreditCard"
+      }
+    },
+    {
+      "id": "ad2d0d23-b92b-45c8-915c-17bc80a7db2a",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8525,
+        "y": 530
+      },
+      "data": {
+        "label": "Response_TS-DE-3_CreditCard",
+        "include_node_ids": [
+          "87a066f3-cb5b-4406-bf81-fb1da3d98f75"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "5401a2fe-4241-4985-a693-598e69fe7d9d",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 6425
+      },
+      "data": {
+        "sourceHandle": "df8500af-6bbf-4de8-b9b1-412f796eeef3",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "125192bf-bf08-4efd-ae9c-1c927ec34a0b",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'title': \"Go to 'eStatements and eAdvice'\", 'type': 'navigationLink', 'urls': {'android': 'scheme://searchhelp?name=eStatement', 'ios': 'scheme://searchhelp?name=eStatement', 'web': 'https://www.hsbc.com.hk/online/estatements/?pid=GSP_HK_X_ESTATEMENT_MH%20'}}",
+            "id": "75fb6fe8-4bd1-41f3-a517-78950f9d1554"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-3_CreditCard"
+      }
+    },
+    {
+      "id": "125192bf-bf08-4efd-ae9c-1c927ec34a0b",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8875,
+        "y": 530
+      },
+      "data": {
+        "label": "Response_TS-DE-3_CreditCard",
+        "include_node_ids": [
+          "5401a2fe-4241-4985-a693-598e69fe7d9d"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "54573df2-72c0-4dfb-b163-c018e6499fa4",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 6625
+      },
+      "data": {
+        "sourceHandle": "bc9ed326-b162-417f-8de2-fc6c78eeb613",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "6282f339-a12e-4766-bc26-a5c13b7d00e3",
+      "hidden": true,
+      "config": {
+        "title": "VariableAssignment_TS-DE-4_DE_Mortgage",
+        "desc": "",
+        "code": "\n        def main() -> dict:\n            # 执行用户代码\n                SkillSet = \"Mortgage\"\n            \n            # 返回所有输出变量\n            return {\n        \"SkillSet\": SkillSet\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "SkillSet",
+            "type": "string",
+            "variable_assign": "SkillSet"
+          }
+        ],
+        "args": []
+      }
+    },
+    {
+      "id": "6282f339-a12e-4766-bc26-a5c13b7d00e3",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 4325,
+        "y": 950
+      },
+      "data": {
+        "label": "VariableAssignment_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "54573df2-72c0-4dfb-b163-c018e6499fa4"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "c62365ef-2c2b-4b1b-85e2-8427c07d63dd",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 6825
+      },
+      "data": {
+        "sourceHandle": "6f6ad76d-e680-4613-a7a2-b7cc59a11a4e",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "06b0fab1-12d4-4572-8dd4-4a87280a4d92",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': \"Please go to 'eStatements and eAdvice' and select the account, period, and document type to check your eStatement.\", 'type': 'message'}",
+            "id": "ea404d88-065c-48e5-b6ec-0c252b50beab"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "06b0fab1-12d4-4572-8dd4-4a87280a4d92",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 4675,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "c62365ef-2c2b-4b1b-85e2-8427c07d63dd"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "c1b5c843-37fe-4749-a5de-a4592bef49e6",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 7025
+      },
+      "data": {
+        "sourceHandle": "9705dc37-a7b1-4ba5-870b-b76e86a4888f",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "dc73f824-f818-4234-937a-6ddcb3a09fb5",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'If you want to download or save the eStatement, select the icon in the top right corner.', 'type': 'message'}",
+            "id": "5e03a6ce-64ff-4b82-8a8c-535a6d14fa40"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "dc73f824-f818-4234-937a-6ddcb3a09fb5",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5025,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "c1b5c843-37fe-4749-a5de-a4592bef49e6"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "d37e21d1-8daf-43f3-822f-ff22822bef31",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 7225
+      },
+      "data": {
+        "sourceHandle": "395d322b-b515-4598-98a0-95a669332569",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "68c1c6d6-3f2b-4a1b-a1ea-f62177df73ea",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': \"If you'd like a copy of your mortgage statement, our customer service officer can further help you.\", 'type': 'message'}",
+            "id": "821b03f9-fff0-4f95-b229-06b4d738fd67"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "68c1c6d6-3f2b-4a1b-a1ea-f62177df73ea",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5375,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "d37e21d1-8daf-43f3-822f-ff22822bef31"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "4b7c0d17-8305-4ca9-9d23-67fb310dbe8b",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 7425
+      },
+      "data": {
+        "sourceHandle": "a61fca9a-d0b0-46fc-89a8-30b149b403ca",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "42b139be-3e70-4b44-a4c5-a0a6e25f0242",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'title': \"Go to 'eStatements and eAdvice'\", 'type': 'navigationLink', 'urls': {'android': 'scheme://searchhelp?name=eStatement', 'ios': 'scheme://searchhelp?name=eStatement', 'web': 'https://www.hsbc.com.hk/online/estatements/?pid=GSP_HK_X_ESTATEMENT_MH%20'}}",
+            "id": "6adf3159-0c44-4533-8a90-04f53489d062"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "42b139be-3e70-4b44-a4c5-a0a6e25f0242",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 5725,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "4b7c0d17-8305-4ca9-9d23-67fb310dbe8b"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "ab45ad99-8a34-4834-914c-0d386c3d8614",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 7625
+      },
+      "data": {
+        "sourceHandle": "d3edf531-2d06-42ef-978e-725006a7588f",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "06b8dc0f-62a6-4c36-a022-911c9eefbbaa",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'buttons': ['How to apply for a copy of the mortgage statement?'], 'type': 'additionalQuestions'}",
+            "id": "d8b91977-cff6-40cf-830c-c4a97b88ab11"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "06b8dc0f-62a6-4c36-a022-911c9eefbbaa",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6075,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "ab45ad99-8a34-4834-914c-0d386c3d8614"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "6fa37cf2-f54f-4a67-9e7d-ebeb4b5f2561",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 7825
+      },
+      "data": {
+        "sourceHandle": "8a206eba-a8ae-48fb-8599-81de145f57fa",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'followUp': 'true', 'text': 'Can I help you with anything else?', 'type': 'message'}",
+            "id": "bd350e52-7a77-45df-a3c4-18f9bcef8632"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_TS-DE-4_DE_Mortgage"
+      }
+    },
+    {
+      "id": "4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6425,
+        "y": 950
+      },
+      "data": {
+        "label": "Response_TS-DE-4_DE_Mortgage",
+        "include_node_ids": [
+          "6fa37cf2-f54f-4a67-9e7d-ebeb4b5f2561"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "type": "captureUserReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 8025
+      },
+      "data": {
+        "sourceHandle": "e4bd8930-5f60-42e9-b569-f7162a4acfc9",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "95413af3-0657-4eab-8d43-73c8b9a3f095",
+      "hidden": true,
+      "config": {
+        "variable_assign": "last_user_response",
+        "title": "Capture User Input"
+      }
+    },
+    {
+      "id": "95413af3-0657-4eab-8d43-73c8b9a3f095",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 6775,
+        "y": 950
+      },
+      "data": {
+        "label": "Capture User Input",
+        "include_node_ids": [
+          "b76de34b-b7c3-4c6c-821f-b68ab958c7a9"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "3b556194-a95b-44cd-b3d8-02d78e2083ad",
+      "type": "knowledgeAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 8225
+      },
+      "data": {
+        "sourceHandle": "2b8ce3f9-6dfb-4ca8-b5fa-59448f880a23",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ec296685-d84e-47b8-aa8c-592f5456c38f",
+      "hidden": true,
+      "config": {
+        "title": "Knowledge Base Retrieval",
+        "variable_assign": "variable_17",
+        "rag_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 1,
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "knowledge_base_ids": [
+            4993
+          ],
+          "ai_tag_list": [],
+          "knowledge_search_flag": true,
+          "keyword_enable": false,
+          "keywords": ""
+        },
+        "desc": "Knowledge Base Retrieval"
+      }
+    },
+    {
+      "id": "ec296685-d84e-47b8-aa8c-592f5456c38f",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7125,
+        "y": 1005
+      },
+      "data": {
+        "label": "Knowledge Base Retrieval",
+        "include_node_ids": [
+          "3b556194-a95b-44cd-b3d8-02d78e2083ad"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "529d371c-d21c-4b9d-a17d-7eb2b2b6748f",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 8425
+      },
+      "data": {
+        "sourceHandle": "2e9127ef-682d-4697-822d-931bd296c6df",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "01471cc6-f5c2-4aab-8eaa-beebb1ca85cb",
+      "hidden": true,
+      "config": {
+        "title": "Extract Intent from RAG",
+        "desc": "",
+        "code": "import re\ndef main(variable_17) -> dict:\n    match = re.search(r\"A:(.*)\", variable_17)\n    if match:\n        result = match.group(1).strip()\n    else:\n        result = \"unknown\"\n    return {\n        \"intent\": result\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "intent",
+            "type": "string",
+            "variable_assign": "intent"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_17",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_17\" data-name=\"{{variable_17}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_17}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "01471cc6-f5c2-4aab-8eaa-beebb1ca85cb",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7475,
+        "y": 1005
+      },
+      "data": {
+        "label": "Extract Intent from RAG",
+        "include_node_ids": [
+          "529d371c-d21c-4b9d-a17d-7eb2b2b6748f"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "0a526925-c94f-4877-a0f9-bd5b99f93703",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 8625
+      },
+      "data": {
+        "sourceHandle": "a81ea53f-1645-442c-b468-c4fe2827fc50",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "de5e79dc-0bf2-41f9-bf78-74a3b8315df9",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "{'text': 'I didn't get that. Can you repeat?', 'type': 'message'}",
+            "id": "fallback_text_4c848c65_117"
+          }
+        ],
+        "rich_text": [],
+        "title": "Fallback Message"
+      }
+    },
+    {
+      "id": "de5e79dc-0bf2-41f9-bf78-74a3b8315df9",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 9225,
+        "y": 850
+      },
+      "data": {
+        "label": "Fallback Message",
+        "include_node_ids": [
+          "0a526925-c94f-4877-a0f9-bd5b99f93703"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "ed4ca719-8e4d-401d-8e9d-125ab2108520",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 8825
+      },
+      "data": {
+        "sourceHandle": "2fa78a92-4d63-495b-9ee0-1413fd0a9a37",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Is TXNAndSTMT_DownloadEstatement_Mortgage",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "TXNAndSTMT_DownloadEstatement_Mortgage",
+                "condition_variable": "intent"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "3367bafe-6819-418e-918a-b30f2e7e7876"
+          },
+          {
+            "condition_name": "Not TXNAndSTMT_DownloadEstatement_Mortgage",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "f2f0957d-d034-42d6-b039-fe2130240230"
+          }
+        ],
+        "title": "Check if Intent is TXNAndSTMT_DownloadEstatement_Mortgage"
+      }
+    },
+    {
+      "id": "4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 7825,
+        "y": 1005
+      },
+      "data": {
+        "label": "Check if Intent is TXNAndSTMT_DownloadEstatement_Mortgage",
+        "include_node_ids": [
+          "ed4ca719-8e4d-401d-8e9d-125ab2108520"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "is_TXNAndSTMT_DownloadEstatement_Mortgage": "3367bafe-6819-418e-918a-b30f2e7e7876",
+        "not_TXNAndSTMT_DownloadEstatement_Mortgage": "f2f0957d-d034-42d6-b039-fe2130240230"
+      }
+    },
+    {
+      "id": "fd2339fd-fa0d-4f30-b713-411aeec41505",
+      "type": "llmVariableAssignment",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 9025
+      },
+      "data": {
+        "sourceHandle": "608cb07d-ad83-4a97-b04e-595a4ff43a05",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "accc8080-de1f-465d-ab68-11ce799aaa64",
+      "hidden": true,
+      "config": {
+        "title": "Extract Parameters for TXNAndSTMT_DownloadEstatement_Mortgage",
+        "prompt_template": "#Role\nYou are an information extraction specialist. Your task is to extract parameters from the user's reply.\n\n##User Input\n{{last_user_response}}\n\n##Output Template\n{\n  \"DE_Mortgage\": \"\",\n}\n\n##Instructions\nExtract the required parameters from user input and return in JSON format. If a parameter is not found, use empty string.\n\n##Hints (Use one of the allowed values for each parameter)\n- DE_Mortgage: allowed values (en) = How to apply for a copy of the mortgage statement?\n",
+        "variable_assign": "variable_18",
+        "llm_config": {
+          "rag_correlation_threshold": 65,
+          "rag_max_reference_knowledge_num": 3,
+          "divergence": 2,
+          "prompt": "",
+          "llm_name": "azure-gpt-4o",
+          "rag_question": "<span class=\"rich-mention__span\" data-id=\"last_user_response\" data-name=\"{{last_user_response}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{last_user_response}}</span>",
+          "rag_range": "",
+          "rag_enabled": "",
+          "knowledge_base_ids": [],
+          "ai_tag_list": [],
+          "knowledge_search_flag": false,
+          "chat_history_flag": true,
+          "chat_history_count": 3,
+          "ltm_enabled": false,
+          "ltm_search_range": "0",
+          "ltm_robot_ids": [],
+          "ltm_question": "",
+          "ltm_recall_count": 5
+        },
+        "desc": "Extract Parameters for TXNAndSTMT_DownloadEstatement_Mortgage"
+      }
+    },
+    {
+      "id": "accc8080-de1f-465d-ab68-11ce799aaa64",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8175,
+        "y": 1060
+      },
+      "data": {
+        "label": "Extract Parameters for TXNAndSTMT_DownloadEstatement_Mortgage",
+        "include_node_ids": [
+          "fd2339fd-fa0d-4f30-b713-411aeec41505"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "2580aa49-c5b2-4d4c-83a2-1e750da81b72",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 9225
+      },
+      "data": {
+        "sourceHandle": "b5c56550-ac8c-43c3-862b-bd5650c51fb7",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "edeaf2c4-caa3-45da-a76c-4df344654b3f",
+      "hidden": true,
+      "config": {
+        "title": "Parse Parameters for TXNAndSTMT_DownloadEstatement_Mortgage",
+        "desc": "",
+        "code": "import re\n\ndef main(variable_18) -> dict:\n    # 提取JSON\n    json_match = re.findall(r'\\{.*\\}', variable_18, re.DOTALL)\n    if not json_match:\n        return {}\n    \n    json_str = json_match[0]\n    json_str = json_str.replace('null', '\"None\"').replace(\"Null\", '\"None\"')\n    \n    try:\n        result = eval(json_str)\n        return result\n    except:\n        return {}\n",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "DE_Mortgage",
+            "type": "string",
+            "variable_assign": "DE_Mortgage"
+          }
+        ],
+        "args": [
+          {
+            "name": "variable_18",
+            "default_value": "​<span class=\"rich-mention__span\" data-id=\"variable_18\" data-name=\"{{variable_18}}\" contenteditable=\"false\" style=\"color: rgb(55, 171, 255); user-select: all;\">{{variable_18}}</span>​",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edeaf2c4-caa3-45da-a76c-4df344654b3f",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8525,
+        "y": 1060
+      },
+      "data": {
+        "label": "Parse Parameters for TXNAndSTMT_DownloadEstatement_Mortgage",
+        "include_node_ids": [
+          "2580aa49-c5b2-4d4c-83a2-1e750da81b72"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "93b0f00b-3c18-46e9-ac8f-18a3c700d5d0",
+      "type": "code",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 9425
+      },
+      "data": {
+        "sourceHandle": "8f2c9704-8ba0-4398-bfb2-a073eb2cb1b2",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "68d57f71-2a40-4f07-ad5f-0624bbec8beb",
+      "hidden": true,
+      "config": {
+        "title": "Set Parameters (TXNAndSTMT_DownloadEstatement_Mortgage)",
+        "desc": "",
+        "code": "\n        def main() -> dict:\n            # 执行用户代码\n                TXNAndSTMT_DownloadEstatement_DE_Mortgage = True\n            \n            # 返回所有输出变量\n            return {\n        \"TXNAndSTMT_DownloadEstatement_DE_Mortgage\": TXNAndSTMT_DownloadEstatement_DE_Mortgage\n    }",
+        "code_language": "python3",
+        "outputs": [
+          {
+            "name": "TXNAndSTMT_DownloadEstatement_DE_Mortgage",
+            "type": "string",
+            "variable_assign": "TXNAndSTMT_DownloadEstatement_DE_Mortgage"
+          }
+        ],
+        "args": []
+      }
+    },
+    {
+      "id": "68d57f71-2a40-4f07-ad5f-0624bbec8beb",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 9225,
+        "y": 1060
+      },
+      "data": {
+        "label": "Set Parameters (TXNAndSTMT_DownloadEstatement_Mortgage)",
+        "include_node_ids": [
+          "93b0f00b-3c18-46e9-ac8f-18a3c700d5d0"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    },
+    {
+      "id": "9885b2e3-6c00-4c6c-8f36-1b9e6ee1c323",
+      "type": "condition",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 9625
+      },
+      "data": {
+        "sourceHandle": "5be4168e-1473-46cc-8c09-5eec0825240c",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "ebc1810d-2448-4ba7-ad28-ffe52dac862b",
+      "hidden": true,
+      "config": {
+        "if_else_conditions": [
+          {
+            "condition_name": "Route TXNAndSTMT_DownloadEstatement_Mortgage: How_to_apply_for_a_c...",
+            "logical_operator": "and",
+            "conditions": [
+              {
+                "condition_type": "variable",
+                "comparison_operator": "=",
+                "condition_value": "How to apply for a copy of the mortgage statement?",
+                "condition_variable": "DE_Mortgage"
+              }
+            ],
+            "condition_action": [],
+            "condition_id": "8c7fdaef-6911-46c8-acb1-aa10151bb908"
+          },
+          {
+            "condition_name": "Parameter Fallback",
+            "logical_operator": "other",
+            "conditions": [],
+            "condition_action": [],
+            "condition_id": "ab68d8bf-d654-4fde-9b7d-82077e81aac8"
+          }
+        ],
+        "title": "Parameter Routing for TXNAndSTMT_DownloadEstatement_Mortgage"
+      }
+    },
+    {
+      "id": "ebc1810d-2448-4ba7-ad28-ffe52dac862b",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 8875,
+        "y": 1060
+      },
+      "data": {
+        "label": "Parameter Routing for TXNAndSTMT_DownloadEstatement_Mortgage",
+        "include_node_ids": [
+          "9885b2e3-6c00-4c6c-8f36-1b9e6ee1c323"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "original_id_to_handle": {
+        "param_TXNAndSTMT_DownloadEstatement_Mortgage_1": "8c7fdaef-6911-46c8-acb1-aa10151bb908",
+        "param_fallback_TXNAndSTMT_DownloadEstatement_Mortgage": "ab68d8bf-d654-4fde-9b7d-82077e81aac8"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "vueflow__edge-39e38553-3d90-4912-82b6-a7470132a55a84c18f67-2ec5-4a1d-b9a0-abe70a6fb227-3bad51d7-2659-4147-bca3-48de27b7dc028d7bae73-0730-4622-9962-5643b4a30a23",
+      "type": "custom",
+      "source": "39e38553-3d90-4912-82b6-a7470132a55a",
+      "target": "3bad51d7-2659-4147-bca3-48de27b7dc02",
+      "sourceHandle": "84c18f67-2ec5-4a1d-b9a0-abe70a6fb227",
+      "targetHandle": "8d7bae73-0730-4622-9962-5643b4a30a23",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 2825,
+      "sourceY": 405,
+      "targetX": 2925,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-39e38553-3d90-4912-82b6-a7470132a55a4bdc7f03-b69d-4de2-91e2-95eabe84dd15-400e6f3d-919e-46bb-bc92-267089dfae5f422d37a6-c047-4530-a54d-db0012375f5d",
+      "type": "custom",
+      "source": "39e38553-3d90-4912-82b6-a7470132a55a",
+      "target": "400e6f3d-919e-46bb-bc92-267089dfae5f",
+      "sourceHandle": "4bdc7f03-b69d-4de2-91e2-95eabe84dd15",
+      "targetHandle": "422d37a6-c047-4530-a54d-db0012375f5d",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 2825,
+      "sourceY": 405,
+      "targetX": 3975,
+      "targetY": 150,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-917b988c-1126-468c-83e5-43361516b77c5a51338a-2028-4c7b-b31e-e89a3a82f89f-1ab24524-1be2-462a-acad-3550503762b8a68e8f57-3220-4f4d-ac7e-ef3804eb0f9b",
+      "type": "custom",
+      "source": "917b988c-1126-468c-83e5-43361516b77c",
+      "target": "1ab24524-1be2-462a-acad-3550503762b8",
+      "sourceHandle": "5a51338a-2028-4c7b-b31e-e89a3a82f89f",
+      "targetHandle": "a68e8f57-3220-4f4d-ac7e-ef3804eb0f9b",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3875,
+      "sourceY": 460,
+      "targetX": 3975,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-917b988c-1126-468c-83e5-43361516b77cb3671552-0f4d-423f-9bfe-a772f6b8a1d7-ae00cf42-5519-4057-940d-3fa656375c83deb92c70-96b2-4a99-b012-9e196d337b1e",
+      "type": "custom",
+      "source": "917b988c-1126-468c-83e5-43361516b77c",
+      "target": "ae00cf42-5519-4057-940d-3fa656375c83",
+      "sourceHandle": "b3671552-0f4d-423f-9bfe-a772f6b8a1d7",
+      "targetHandle": "deb92c70-96b2-4a99-b012-9e196d337b1e",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3875,
+      "sourceY": 460,
+      "targetX": 3975,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-917b988c-1126-468c-83e5-43361516b77c074130e5-db43-435b-ac89-c895c76ba81e-782decec-c8c8-4a48-8257-0bbb7dc12b912cb40cc0-16ad-436d-b1ba-e9af21231c3a",
+      "type": "custom",
+      "source": "917b988c-1126-468c-83e5-43361516b77c",
+      "target": "782decec-c8c8-4a48-8257-0bbb7dc12b91",
+      "sourceHandle": "074130e5-db43-435b-ac89-c895c76ba81e",
+      "targetHandle": "2cb40cc0-16ad-436d-b1ba-e9af21231c3a",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3875,
+      "sourceY": 460,
+      "targetX": 7475,
+      "targetY": 660,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-917b988c-1126-468c-83e5-43361516b77cef749b70-79a8-4a05-b59d-335245887c6b-f5babfc9-13cb-4f50-9689-62d8b1af21b319fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "type": "custom",
+      "source": "917b988c-1126-468c-83e5-43361516b77c",
+      "target": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "sourceHandle": "ef749b70-79a8-4a05-b59d-335245887c6b",
+      "targetHandle": "19fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3875,
+      "sourceY": 460,
+      "targetX": 7825,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-917b988c-1126-468c-83e5-43361516b77c4ccee3d6-562b-4831-8c0e-2aaf76721e3b-400e6f3d-919e-46bb-bc92-267089dfae5f422d37a6-c047-4530-a54d-db0012375f5d",
+      "type": "custom",
+      "source": "917b988c-1126-468c-83e5-43361516b77c",
+      "target": "400e6f3d-919e-46bb-bc92-267089dfae5f",
+      "sourceHandle": "4ccee3d6-562b-4831-8c0e-2aaf76721e3b",
+      "targetHandle": "422d37a6-c047-4530-a54d-db0012375f5d",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3875,
+      "sourceY": 460,
+      "targetX": 3975,
+      "targetY": 150,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-1d4cb4fc-ae40-42ba-8626-fd74509f6ed0cabd2862-5d80-4e4d-ad00-4b570b22f059-3b72728d-bb77-49c4-ab00-872baf11a5a48b4a98d2-3a38-4795-b93f-f74489a1e375",
+      "type": "custom",
+      "source": "1d4cb4fc-ae40-42ba-8626-fd74509f6ed0",
+      "target": "3b72728d-bb77-49c4-ab00-872baf11a5a4",
+      "sourceHandle": "cabd2862-5d80-4e4d-ad00-4b570b22f059",
+      "targetHandle": "8b4a98d2-3a38-4795-b93f-f74489a1e375",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 6675,
+      "sourceY": 405,
+      "targetX": 6775,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-1d4cb4fc-ae40-42ba-8626-fd74509f6ed02999cf35-020d-4d5b-89cb-fa3c8789c4e0-c3983627-7334-4d90-85f7-f3d79af393f935a1d35a-3297-42f4-83bb-a420a9ec9b6c",
+      "type": "custom",
+      "source": "1d4cb4fc-ae40-42ba-8626-fd74509f6ed0",
+      "target": "c3983627-7334-4d90-85f7-f3d79af393f9",
+      "sourceHandle": "2999cf35-020d-4d5b-89cb-fa3c8789c4e0",
+      "targetHandle": "35a1d35a-3297-42f4-83bb-a420a9ec9b6c",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 6675,
+      "sourceY": 405,
+      "targetX": 7825,
+      "targetY": 295,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-f7e52b59-ac64-4f2f-bf8d-524a704183995e790c6a-f1cd-4565-a933-5c85053cd654-f5babfc9-13cb-4f50-9689-62d8b1af21b319fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "type": "custom",
+      "source": "f7e52b59-ac64-4f2f-bf8d-524a70418399",
+      "target": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "sourceHandle": "5e790c6a-f1cd-4565-a933-5c85053cd654",
+      "targetHandle": "19fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7725,
+      "sourceY": 460,
+      "targetX": 7825,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-f7e52b59-ac64-4f2f-bf8d-524a704183998af028f0-882c-4857-9abd-767de5b03810-c3983627-7334-4d90-85f7-f3d79af393f935a1d35a-3297-42f4-83bb-a420a9ec9b6c",
+      "type": "custom",
+      "source": "f7e52b59-ac64-4f2f-bf8d-524a70418399",
+      "target": "c3983627-7334-4d90-85f7-f3d79af393f9",
+      "sourceHandle": "8af028f0-882c-4857-9abd-767de5b03810",
+      "targetHandle": "35a1d35a-3297-42f4-83bb-a420a9ec9b6c",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7725,
+      "sourceY": 460,
+      "targetX": 7825,
+      "targetY": 295,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe3367bafe-6819-418e-918a-b30f2e7e7876-accc8080-de1f-465d-ab68-11ce799aaa64fd2339fd-fa0d-4f30-b713-411aeec41505",
+      "type": "custom",
+      "source": "4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe",
+      "target": "accc8080-de1f-465d-ab68-11ce799aaa64",
+      "sourceHandle": "3367bafe-6819-418e-918a-b30f2e7e7876",
+      "targetHandle": "fd2339fd-fa0d-4f30-b713-411aeec41505",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8075,
+      "sourceY": 1080,
+      "targetX": 8175,
+      "targetY": 1135,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-4c37e4ce-7751-4e55-b53f-e8a3ddedf9fef2f0957d-d034-42d6-b039-fe2130240230-de5e79dc-0bf2-41f9-bf78-74a3b8315df90a526925-c94f-4877-a0f9-bd5b99f93703",
+      "type": "custom",
+      "source": "4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe",
+      "target": "de5e79dc-0bf2-41f9-bf78-74a3b8315df9",
+      "sourceHandle": "f2f0957d-d034-42d6-b039-fe2130240230",
+      "targetHandle": "0a526925-c94f-4877-a0f9-bd5b99f93703",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8075,
+      "sourceY": 1080,
+      "targetX": 9225,
+      "targetY": 925,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ebc1810d-2448-4ba7-ad28-ffe52dac862b8c7fdaef-6911-46c8-acb1-aa10151bb908-68d57f71-2a40-4f07-ad5f-0624bbec8beb93b0f00b-3c18-46e9-ac8f-18a3c700d5d0",
+      "type": "custom",
+      "source": "ebc1810d-2448-4ba7-ad28-ffe52dac862b",
+      "target": "68d57f71-2a40-4f07-ad5f-0624bbec8beb",
+      "sourceHandle": "8c7fdaef-6911-46c8-acb1-aa10151bb908",
+      "targetHandle": "93b0f00b-3c18-46e9-ac8f-18a3c700d5d0",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 9125,
+      "sourceY": 1135,
+      "targetX": 9225,
+      "targetY": 1135,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ebc1810d-2448-4ba7-ad28-ffe52dac862bab68d8bf-d654-4fde-9b7d-82077e81aac8-de5e79dc-0bf2-41f9-bf78-74a3b8315df90a526925-c94f-4877-a0f9-bd5b99f93703",
+      "type": "custom",
+      "source": "ebc1810d-2448-4ba7-ad28-ffe52dac862b",
+      "target": "de5e79dc-0bf2-41f9-bf78-74a3b8315df9",
+      "sourceHandle": "ab68d8bf-d654-4fde-9b7d-82077e81aac8",
+      "targetHandle": "0a526925-c94f-4877-a0f9-bd5b99f93703",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 9125,
+      "sourceY": 1135,
+      "targetX": 9225,
+      "targetY": 925,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-46e9772c-75ad-4448-bed8-749ec00662ae666f1fb7-c4a9-4f6b-98b9-1b7d40af34cd-b7abbae8-8905-490a-b3e3-0d95fb4285efccd4354f-fb99-4239-8500-bad6e11aa445",
+      "type": "custom",
+      "source": "46e9772c-75ad-4448-bed8-749ec00662ae",
+      "target": "b7abbae8-8905-490a-b3e3-0d95fb4285ef",
+      "sourceHandle": "666f1fb7-c4a9-4f6b-98b9-1b7d40af34cd",
+      "targetHandle": "ccd4354f-fb99-4239-8500-bad6e11aa445",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 1075,
+      "sourceY": 350,
+      "targetX": 1175,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-b7abbae8-8905-490a-b3e3-0d95fb4285ef7e3c831c-90be-4218-94fd-908840d69efc-ff47819b-906f-4342-86d0-2c7fd3392a93018ae9c8-c4b8-4868-ba8f-b74e185f25f8",
+      "type": "custom",
+      "source": "b7abbae8-8905-490a-b3e3-0d95fb4285ef",
+      "target": "ff47819b-906f-4342-86d0-2c7fd3392a93",
+      "sourceHandle": "7e3c831c-90be-4218-94fd-908840d69efc",
+      "targetHandle": "018ae9c8-c4b8-4868-ba8f-b74e185f25f8",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 1425,
+      "sourceY": 350,
+      "targetX": 1525,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ff47819b-906f-4342-86d0-2c7fd3392a93a5c97772-9462-4e9e-80de-f00d0522a93a-40190de8-32a7-4470-8f12-b27725c152358322ccba-e079-4e14-a2d2-94b208eb9b6b",
+      "type": "custom",
+      "source": "ff47819b-906f-4342-86d0-2c7fd3392a93",
+      "target": "40190de8-32a7-4470-8f12-b27725c15235",
+      "sourceHandle": "a5c97772-9462-4e9e-80de-f00d0522a93a",
+      "targetHandle": "8322ccba-e079-4e14-a2d2-94b208eb9b6b",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 1775,
+      "sourceY": 350,
+      "targetX": 1875,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-40190de8-32a7-4470-8f12-b27725c152357e6028ed-cd20-41a4-8587-712736c9a39a-2d65a86b-a0e1-4f75-8dea-6e9850cc8aca55308c00-1257-4913-a5df-c8152b5321ed",
+      "type": "custom",
+      "source": "40190de8-32a7-4470-8f12-b27725c15235",
+      "target": "2d65a86b-a0e1-4f75-8dea-6e9850cc8aca",
+      "sourceHandle": "7e6028ed-cd20-41a4-8587-712736c9a39a",
+      "targetHandle": "55308c00-1257-4913-a5df-c8152b5321ed",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 2125,
+      "sourceY": 405,
+      "targetX": 2225,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-2d65a86b-a0e1-4f75-8dea-6e9850cc8aca68b07519-f5d2-49af-9ac4-c2e7ae37ad72-39e38553-3d90-4912-82b6-a7470132a55a06102da1-2a06-4f65-b326-6a43cdbedb83",
+      "type": "custom",
+      "source": "2d65a86b-a0e1-4f75-8dea-6e9850cc8aca",
+      "target": "39e38553-3d90-4912-82b6-a7470132a55a",
+      "sourceHandle": "68b07519-f5d2-49af-9ac4-c2e7ae37ad72",
+      "targetHandle": "06102da1-2a06-4f65-b326-6a43cdbedb83",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 2475,
+      "sourceY": 405,
+      "targetX": 2575,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-3bad51d7-2659-4147-bca3-48de27b7dc02e642e49e-fda3-4385-ae4c-507fee705d2c-2809edb2-d264-482e-97fc-4caaf6df236f6c0627fa-b1b8-4664-a9d9-930e15af94b5",
+      "type": "custom",
+      "source": "3bad51d7-2659-4147-bca3-48de27b7dc02",
+      "target": "2809edb2-d264-482e-97fc-4caaf6df236f",
+      "sourceHandle": "e642e49e-fda3-4385-ae4c-507fee705d2c",
+      "targetHandle": "6c0627fa-b1b8-4664-a9d9-930e15af94b5",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3175,
+      "sourceY": 460,
+      "targetX": 3275,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-2809edb2-d264-482e-97fc-4caaf6df236f7f73a87e-750d-4758-acef-912b641ae616-917b988c-1126-468c-83e5-43361516b77c9cfcf7c9-f232-4040-ba56-1f31980e37f4",
+      "type": "custom",
+      "source": "2809edb2-d264-482e-97fc-4caaf6df236f",
+      "target": "917b988c-1126-468c-83e5-43361516b77c",
+      "sourceHandle": "7f73a87e-750d-4758-acef-912b641ae616",
+      "targetHandle": "9cfcf7c9-f232-4040-ba56-1f31980e37f4",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 3525,
+      "sourceY": 460,
+      "targetX": 3625,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-1ab24524-1be2-462a-acad-3550503762b82139c019-5e9c-491c-bae5-1ba3fa673e59-2ad8ed9e-2f54-46e5-9007-ba2130b22549b7beaa6d-89bb-4497-a299-73549c0c9d57",
+      "type": "custom",
+      "source": "1ab24524-1be2-462a-acad-3550503762b8",
+      "target": "2ad8ed9e-2f54-46e5-9007-ba2130b22549",
+      "sourceHandle": "2139c019-5e9c-491c-bae5-1ba3fa673e59",
+      "targetHandle": "b7beaa6d-89bb-4497-a299-73549c0c9d57",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4225,
+      "sourceY": 350,
+      "targetX": 4325,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ae00cf42-5519-4057-940d-3fa656375c83b52eca10-ba0d-4ee0-90e5-5d548347bf3f-6282f339-a12e-4766-bc26-a5c13b7d00e354573df2-72c0-4dfb-b163-c018e6499fa4",
+      "type": "custom",
+      "source": "ae00cf42-5519-4057-940d-3fa656375c83",
+      "target": "6282f339-a12e-4766-bc26-a5c13b7d00e3",
+      "sourceHandle": "b52eca10-ba0d-4ee0-90e5-5d548347bf3f",
+      "targetHandle": "54573df2-72c0-4dfb-b163-c018e6499fa4",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4225,
+      "sourceY": 1025,
+      "targetX": 4325,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-782decec-c8c8-4a48-8257-0bbb7dc12b91d76dd210-b85f-4fb9-8670-d405c7248f22-f5babfc9-13cb-4f50-9689-62d8b1af21b319fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "type": "custom",
+      "source": "782decec-c8c8-4a48-8257-0bbb7dc12b91",
+      "target": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "sourceHandle": "d76dd210-b85f-4fb9-8670-d405c7248f22",
+      "targetHandle": "19fdf8c3-ff11-440c-aa5e-72b3ca4e53c9",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7725,
+      "sourceY": 660,
+      "targetX": 7825,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-400e6f3d-919e-46bb-bc92-267089dfae5f3db36f85-9a78-4713-b734-f6153619a630-ff47819b-906f-4342-86d0-2c7fd3392a93018ae9c8-c4b8-4868-ba8f-b74e185f25f8",
+      "type": "custom",
+      "source": "400e6f3d-919e-46bb-bc92-267089dfae5f",
+      "target": "ff47819b-906f-4342-86d0-2c7fd3392a93",
+      "sourceHandle": "3db36f85-9a78-4713-b734-f6153619a630",
+      "targetHandle": "018ae9c8-c4b8-4868-ba8f-b74e185f25f8",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4225,
+      "sourceY": 150,
+      "targetX": 1525,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-2ad8ed9e-2f54-46e5-9007-ba2130b22549dc41c17c-4377-4aad-b84a-7dcc63e08621-b84c4d72-edb0-4518-a55f-b604a4110a603e445e6f-fe1e-4f92-8c57-b3b80afb7228",
+      "type": "custom",
+      "source": "2ad8ed9e-2f54-46e5-9007-ba2130b22549",
+      "target": "b84c4d72-edb0-4518-a55f-b604a4110a60",
+      "sourceHandle": "dc41c17c-4377-4aad-b84a-7dcc63e08621",
+      "targetHandle": "3e445e6f-fe1e-4f92-8c57-b3b80afb7228",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4575,
+      "sourceY": 350,
+      "targetX": 4675,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-b84c4d72-edb0-4518-a55f-b604a4110a60e4034d60-4d89-4830-a913-a21ea53fde96-ddd98971-81ce-4a2f-928e-0aea2861e155283edc86-258e-4a52-915d-f169ab65bcff",
+      "type": "custom",
+      "source": "b84c4d72-edb0-4518-a55f-b604a4110a60",
+      "target": "ddd98971-81ce-4a2f-928e-0aea2861e155",
+      "sourceHandle": "e4034d60-4d89-4830-a913-a21ea53fde96",
+      "targetHandle": "283edc86-258e-4a52-915d-f169ab65bcff",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4925,
+      "sourceY": 350,
+      "targetX": 5025,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ddd98971-81ce-4a2f-928e-0aea2861e155204fff8c-b35e-40a2-960f-b8e6c4a8419b-55776215-6562-4dd2-9411-7b4b34963e526cbcf706-895b-4034-8901-cd044e02239b",
+      "type": "custom",
+      "source": "ddd98971-81ce-4a2f-928e-0aea2861e155",
+      "target": "55776215-6562-4dd2-9411-7b4b34963e52",
+      "sourceHandle": "204fff8c-b35e-40a2-960f-b8e6c4a8419b",
+      "targetHandle": "6cbcf706-895b-4034-8901-cd044e02239b",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5275,
+      "sourceY": 350,
+      "targetX": 5375,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-55776215-6562-4dd2-9411-7b4b34963e52416f39db-902f-499d-b593-e0489e8adb7c-37dfc1ec-8306-42a4-8287-37c58f4902d5d9c08eb1-7bbb-4760-8aba-96d4b55a7ce3",
+      "type": "custom",
+      "source": "55776215-6562-4dd2-9411-7b4b34963e52",
+      "target": "37dfc1ec-8306-42a4-8287-37c58f4902d5",
+      "sourceHandle": "416f39db-902f-499d-b593-e0489e8adb7c",
+      "targetHandle": "d9c08eb1-7bbb-4760-8aba-96d4b55a7ce3",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5625,
+      "sourceY": 350,
+      "targetX": 5725,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-37dfc1ec-8306-42a4-8287-37c58f4902d5d92da5a8-a3d5-4f52-9bbf-57cf2b002f0f-b7e4c0cb-eb9c-4f99-8703-8f0295aef21d7f3c9803-b5fd-4f14-af9f-ac94653db7cf",
+      "type": "custom",
+      "source": "37dfc1ec-8306-42a4-8287-37c58f4902d5",
+      "target": "b7e4c0cb-eb9c-4f99-8703-8f0295aef21d",
+      "sourceHandle": "d92da5a8-a3d5-4f52-9bbf-57cf2b002f0f",
+      "targetHandle": "7f3c9803-b5fd-4f14-af9f-ac94653db7cf",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5975,
+      "sourceY": 405,
+      "targetX": 6075,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-b7e4c0cb-eb9c-4f99-8703-8f0295aef21df6fe0842-4647-4c3e-b848-320d8dcbcd48-1d4cb4fc-ae40-42ba-8626-fd74509f6ed022aed077-0a7f-4938-ac59-5a5b30881694",
+      "type": "custom",
+      "source": "b7e4c0cb-eb9c-4f99-8703-8f0295aef21d",
+      "target": "1d4cb4fc-ae40-42ba-8626-fd74509f6ed0",
+      "sourceHandle": "f6fe0842-4647-4c3e-b848-320d8dcbcd48",
+      "targetHandle": "22aed077-0a7f-4938-ac59-5a5b30881694",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 6325,
+      "sourceY": 405,
+      "targetX": 6425,
+      "targetY": 405,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-3b72728d-bb77-49c4-ab00-872baf11a5a4cddcc89b-e86b-4e82-970d-6fe26187078b-84977f53-1562-4171-865e-95b9bfc1756449f12473-ff25-4865-99bb-935cc8b11b6d",
+      "type": "custom",
+      "source": "3b72728d-bb77-49c4-ab00-872baf11a5a4",
+      "target": "84977f53-1562-4171-865e-95b9bfc17564",
+      "sourceHandle": "cddcc89b-e86b-4e82-970d-6fe26187078b",
+      "targetHandle": "49f12473-ff25-4865-99bb-935cc8b11b6d",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7025,
+      "sourceY": 460,
+      "targetX": 7125,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-84977f53-1562-4171-865e-95b9bfc1756461040056-52c8-4ef1-98f1-f7c77ebb787d-f7e52b59-ac64-4f2f-bf8d-524a7041839938215ddb-76dd-46a2-a9e3-e4deca30ca8f",
+      "type": "custom",
+      "source": "84977f53-1562-4171-865e-95b9bfc17564",
+      "target": "f7e52b59-ac64-4f2f-bf8d-524a70418399",
+      "sourceHandle": "61040056-52c8-4ef1-98f1-f7c77ebb787d",
+      "targetHandle": "38215ddb-76dd-46a2-a9e3-e4deca30ca8f",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7375,
+      "sourceY": 460,
+      "targetX": 7475,
+      "targetY": 460,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-c3983627-7334-4d90-85f7-f3d79af393f97e56f941-d2c9-4239-b75e-472338486c01-55776215-6562-4dd2-9411-7b4b34963e526cbcf706-895b-4034-8901-cd044e02239b",
+      "type": "custom",
+      "source": "c3983627-7334-4d90-85f7-f3d79af393f9",
+      "target": "55776215-6562-4dd2-9411-7b4b34963e52",
+      "sourceHandle": "7e56f941-d2c9-4239-b75e-472338486c01",
+      "targetHandle": "6cbcf706-895b-4034-8901-cd044e02239b",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8075,
+      "sourceY": 295,
+      "targetX": 5375,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-f5babfc9-13cb-4f50-9689-62d8b1af21b3bc1d2fc3-cadf-495e-9c1f-6e0cd82808f0-6f2856b7-75e5-4c53-8ac6-76942d9dcfb91e68870f-db5c-4aea-a738-847541df2294",
+      "type": "custom",
+      "source": "f5babfc9-13cb-4f50-9689-62d8b1af21b3",
+      "target": "6f2856b7-75e5-4c53-8ac6-76942d9dcfb9",
+      "sourceHandle": "bc1d2fc3-cadf-495e-9c1f-6e0cd82808f0",
+      "targetHandle": "1e68870f-db5c-4aea-a738-847541df2294",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8075,
+      "sourceY": 605,
+      "targetX": 8175,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-6f2856b7-75e5-4c53-8ac6-76942d9dcfb96035a20d-b7a0-4e6d-bbec-aaad9bd10a53-ad2d0d23-b92b-45c8-915c-17bc80a7db2a87a066f3-cb5b-4406-bf81-fb1da3d98f75",
+      "type": "custom",
+      "source": "6f2856b7-75e5-4c53-8ac6-76942d9dcfb9",
+      "target": "ad2d0d23-b92b-45c8-915c-17bc80a7db2a",
+      "sourceHandle": "6035a20d-b7a0-4e6d-bbec-aaad9bd10a53",
+      "targetHandle": "87a066f3-cb5b-4406-bf81-fb1da3d98f75",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8425,
+      "sourceY": 605,
+      "targetX": 8525,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ad2d0d23-b92b-45c8-915c-17bc80a7db2a79892ee1-c853-4b4d-b538-8d535319cfeb-125192bf-bf08-4efd-ae9c-1c927ec34a0b5401a2fe-4241-4985-a693-598e69fe7d9d",
+      "type": "custom",
+      "source": "ad2d0d23-b92b-45c8-915c-17bc80a7db2a",
+      "target": "125192bf-bf08-4efd-ae9c-1c927ec34a0b",
+      "sourceHandle": "79892ee1-c853-4b4d-b538-8d535319cfeb",
+      "targetHandle": "5401a2fe-4241-4985-a693-598e69fe7d9d",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8775,
+      "sourceY": 605,
+      "targetX": 8875,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-125192bf-bf08-4efd-ae9c-1c927ec34a0bdf8500af-6bbf-4de8-b9b1-412f796eeef3-1393e924-589c-4323-91be-cc5a4d04f81a7d3ab75d-1859-4478-aabd-7e20e2794e7f",
+      "type": "custom",
+      "source": "125192bf-bf08-4efd-ae9c-1c927ec34a0b",
+      "target": "1393e924-589c-4323-91be-cc5a4d04f81a",
+      "sourceHandle": "df8500af-6bbf-4de8-b9b1-412f796eeef3",
+      "targetHandle": "7d3ab75d-1859-4478-aabd-7e20e2794e7f",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 9125,
+      "sourceY": 605,
+      "targetX": 9225,
+      "targetY": 605,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-6282f339-a12e-4766-bc26-a5c13b7d00e3bc9ed326-b162-417f-8de2-fc6c78eeb613-06b0fab1-12d4-4572-8dd4-4a87280a4d92c62365ef-2c2b-4b1b-85e2-8427c07d63dd",
+      "type": "custom",
+      "source": "6282f339-a12e-4766-bc26-a5c13b7d00e3",
+      "target": "06b0fab1-12d4-4572-8dd4-4a87280a4d92",
+      "sourceHandle": "bc9ed326-b162-417f-8de2-fc6c78eeb613",
+      "targetHandle": "c62365ef-2c2b-4b1b-85e2-8427c07d63dd",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4575,
+      "sourceY": 1025,
+      "targetX": 4675,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-06b0fab1-12d4-4572-8dd4-4a87280a4d926f6ad76d-e680-4613-a7a2-b7cc59a11a4e-dc73f824-f818-4234-937a-6ddcb3a09fb5c1b5c843-37fe-4749-a5de-a4592bef49e6",
+      "type": "custom",
+      "source": "06b0fab1-12d4-4572-8dd4-4a87280a4d92",
+      "target": "dc73f824-f818-4234-937a-6ddcb3a09fb5",
+      "sourceHandle": "6f6ad76d-e680-4613-a7a2-b7cc59a11a4e",
+      "targetHandle": "c1b5c843-37fe-4749-a5de-a4592bef49e6",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 4925,
+      "sourceY": 1025,
+      "targetX": 5025,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-dc73f824-f818-4234-937a-6ddcb3a09fb59705dc37-a7b1-4ba5-870b-b76e86a4888f-68c1c6d6-3f2b-4a1b-a1ea-f62177df73ead37e21d1-8daf-43f3-822f-ff22822bef31",
+      "type": "custom",
+      "source": "dc73f824-f818-4234-937a-6ddcb3a09fb5",
+      "target": "68c1c6d6-3f2b-4a1b-a1ea-f62177df73ea",
+      "sourceHandle": "9705dc37-a7b1-4ba5-870b-b76e86a4888f",
+      "targetHandle": "d37e21d1-8daf-43f3-822f-ff22822bef31",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5275,
+      "sourceY": 1025,
+      "targetX": 5375,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-68c1c6d6-3f2b-4a1b-a1ea-f62177df73ea395d322b-b515-4598-98a0-95a669332569-42b139be-3e70-4b44-a4c5-a0a6e25f02424b7c0d17-8305-4ca9-9d23-67fb310dbe8b",
+      "type": "custom",
+      "source": "68c1c6d6-3f2b-4a1b-a1ea-f62177df73ea",
+      "target": "42b139be-3e70-4b44-a4c5-a0a6e25f0242",
+      "sourceHandle": "395d322b-b515-4598-98a0-95a669332569",
+      "targetHandle": "4b7c0d17-8305-4ca9-9d23-67fb310dbe8b",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5625,
+      "sourceY": 1025,
+      "targetX": 5725,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-42b139be-3e70-4b44-a4c5-a0a6e25f0242a61fca9a-d0b0-46fc-89a8-30b149b403ca-06b8dc0f-62a6-4c36-a022-911c9eefbbaaab45ad99-8a34-4834-914c-0d386c3d8614",
+      "type": "custom",
+      "source": "42b139be-3e70-4b44-a4c5-a0a6e25f0242",
+      "target": "06b8dc0f-62a6-4c36-a022-911c9eefbbaa",
+      "sourceHandle": "a61fca9a-d0b0-46fc-89a8-30b149b403ca",
+      "targetHandle": "ab45ad99-8a34-4834-914c-0d386c3d8614",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 5975,
+      "sourceY": 1025,
+      "targetX": 6075,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-06b8dc0f-62a6-4c36-a022-911c9eefbbaad3edf531-2d06-42ef-978e-725006a7588f-4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a6fa37cf2-f54f-4a67-9e7d-ebeb4b5f2561",
+      "type": "custom",
+      "source": "06b8dc0f-62a6-4c36-a022-911c9eefbbaa",
+      "target": "4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a",
+      "sourceHandle": "d3edf531-2d06-42ef-978e-725006a7588f",
+      "targetHandle": "6fa37cf2-f54f-4a67-9e7d-ebeb4b5f2561",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 6325,
+      "sourceY": 1025,
+      "targetX": 6425,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a8a206eba-a8ae-48fb-8599-81de145f57fa-95413af3-0657-4eab-8d43-73c8b9a3f095b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "type": "custom",
+      "source": "4c5d5a7f-d194-46fa-8cf1-2690d5ee8b6a",
+      "target": "95413af3-0657-4eab-8d43-73c8b9a3f095",
+      "sourceHandle": "8a206eba-a8ae-48fb-8599-81de145f57fa",
+      "targetHandle": "b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 6675,
+      "sourceY": 1025,
+      "targetX": 6775,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-95413af3-0657-4eab-8d43-73c8b9a3f095e4bd8930-5f60-42e9-b569-f7162a4acfc9-ec296685-d84e-47b8-aa8c-592f5456c38f3b556194-a95b-44cd-b3d8-02d78e2083ad",
+      "type": "custom",
+      "source": "95413af3-0657-4eab-8d43-73c8b9a3f095",
+      "target": "ec296685-d84e-47b8-aa8c-592f5456c38f",
+      "sourceHandle": "e4bd8930-5f60-42e9-b569-f7162a4acfc9",
+      "targetHandle": "3b556194-a95b-44cd-b3d8-02d78e2083ad",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7025,
+      "sourceY": 1025,
+      "targetX": 7125,
+      "targetY": 1080,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-ec296685-d84e-47b8-aa8c-592f5456c38f2b8ce3f9-6dfb-4ca8-b5fa-59448f880a23-01471cc6-f5c2-4aab-8eaa-beebb1ca85cb529d371c-d21c-4b9d-a17d-7eb2b2b6748f",
+      "type": "custom",
+      "source": "ec296685-d84e-47b8-aa8c-592f5456c38f",
+      "target": "01471cc6-f5c2-4aab-8eaa-beebb1ca85cb",
+      "sourceHandle": "2b8ce3f9-6dfb-4ca8-b5fa-59448f880a23",
+      "targetHandle": "529d371c-d21c-4b9d-a17d-7eb2b2b6748f",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7375,
+      "sourceY": 1080,
+      "targetX": 7475,
+      "targetY": 1080,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-01471cc6-f5c2-4aab-8eaa-beebb1ca85cb2e9127ef-682d-4697-822d-931bd296c6df-4c37e4ce-7751-4e55-b53f-e8a3ddedf9feed4ca719-8e4d-401d-8e9d-125ab2108520",
+      "type": "custom",
+      "source": "01471cc6-f5c2-4aab-8eaa-beebb1ca85cb",
+      "target": "4c37e4ce-7751-4e55-b53f-e8a3ddedf9fe",
+      "sourceHandle": "2e9127ef-682d-4697-822d-931bd296c6df",
+      "targetHandle": "ed4ca719-8e4d-401d-8e9d-125ab2108520",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 7725,
+      "sourceY": 1080,
+      "targetX": 7825,
+      "targetY": 1080,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-accc8080-de1f-465d-ab68-11ce799aaa64608cb07d-ad83-4a97-b04e-595a4ff43a05-edeaf2c4-caa3-45da-a76c-4df344654b3f2580aa49-c5b2-4d4c-83a2-1e750da81b72",
+      "type": "custom",
+      "source": "accc8080-de1f-465d-ab68-11ce799aaa64",
+      "target": "edeaf2c4-caa3-45da-a76c-4df344654b3f",
+      "sourceHandle": "608cb07d-ad83-4a97-b04e-595a4ff43a05",
+      "targetHandle": "2580aa49-c5b2-4d4c-83a2-1e750da81b72",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8425,
+      "sourceY": 1135,
+      "targetX": 8525,
+      "targetY": 1135,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-edeaf2c4-caa3-45da-a76c-4df344654b3fb5c56550-ac8c-43c3-862b-bd5650c51fb7-ebc1810d-2448-4ba7-ad28-ffe52dac862b9885b2e3-6c00-4c6c-8f36-1b9e6ee1c323",
+      "type": "custom",
+      "source": "edeaf2c4-caa3-45da-a76c-4df344654b3f",
+      "target": "ebc1810d-2448-4ba7-ad28-ffe52dac862b",
+      "sourceHandle": "b5c56550-ac8c-43c3-862b-bd5650c51fb7",
+      "targetHandle": "9885b2e3-6c00-4c6c-8f36-1b9e6ee1c323",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 8775,
+      "sourceY": 1135,
+      "targetX": 8875,
+      "targetY": 1135,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-68d57f71-2a40-4f07-ad5f-0624bbec8beb8f2c9704-8ba0-4398-bfb2-a073eb2cb1b2-da7ab8ec-5584-476d-958e-f2bddc3cf7e2e61344db-9253-4a2d-91a7-e3e127887fac",
+      "type": "custom",
+      "source": "68d57f71-2a40-4f07-ad5f-0624bbec8beb",
+      "target": "da7ab8ec-5584-476d-958e-f2bddc3cf7e2",
+      "sourceHandle": "8f2c9704-8ba0-4398-bfb2-a073eb2cb1b2",
+      "targetHandle": "e61344db-9253-4a2d-91a7-e3e127887fac",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 9475,
+      "sourceY": 1135,
+      "targetX": 9575,
+      "targetY": 1135,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-de5e79dc-0bf2-41f9-bf78-74a3b8315df9a81ea53f-1645-442c-b468-c4fe2827fc50-95413af3-0657-4eab-8d43-73c8b9a3f095b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "type": "custom",
+      "source": "de5e79dc-0bf2-41f9-bf78-74a3b8315df9",
+      "target": "95413af3-0657-4eab-8d43-73c8b9a3f095",
+      "sourceHandle": "a81ea53f-1645-442c-b468-c4fe2827fc50",
+      "targetHandle": "b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 9475,
+      "sourceY": 925,
+      "targetX": 6775,
+      "targetY": 1025,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-start00000000000000000000start00000000000000000000-b6e96e97-fba6-4d09-8265-b7f70912740a59b0be9a-6941-4ddd-a9f4-aa04fad62a19",
+      "type": "custom",
+      "source": "start00000000000000000000",
+      "target": "b6e96e97-fba6-4d09-8265-b7f70912740a",
+      "sourceHandle": "start00000000000000000000",
+      "targetHandle": "59b0be9a-6941-4ddd-a9f4-aa04fad62a19",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 275,
+      "sourceY": 350,
+      "targetX": 475,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    },
+    {
+      "id": "vueflow__edge-b6e96e97-fba6-4d09-8265-b7f70912740aa1fd6312-bb8e-462f-ac41-63616d56a374-46e9772c-75ad-4448-bed8-749ec00662aec7bc7209-4cb4-4bbd-bab1-c1f979ad21f8",
+      "type": "custom",
+      "source": "b6e96e97-fba6-4d09-8265-b7f70912740a",
+      "target": "46e9772c-75ad-4448-bed8-749ec00662ae",
+      "sourceHandle": "a1fd6312-bb8e-462f-ac41-63616d56a374",
+      "targetHandle": "c7bc7209-4cb4-4bbd-bab1-c1f979ad21f8",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 725,
+      "sourceY": 350,
+      "targetX": 825,
+      "targetY": 350,
+      "zIndex": 0,
+      "animated": false
+    }
+  ],
+  "buttons": [],
+  "config": {
+    "position": [
+      0,
+      0
+    ],
+    "zoom": 1,
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 1
+    }
+  },
+  "intention_info": {
+    "created_by": "HSBC",
+    "modified_by": "chenyu.zhu@brgroup.com",
+    "intention_uuid": "a8ed1270-13c4-47b9-8350-47b0723562cc",
+    "intention_name": "transactionservicing_downloadestatement",
+    "description": "Professional TXNAndSTMT_Deeplink assistant",
+    "positive_examples": [
+      {
+        "id": "0zb2LTOeTeq5TRnHNA8MGA",
+        "value": "credit review report"
+      }
+    ],
+    "negative_examples": [
+      {
+        "id": "7m8tR0yRShKOrMElLphUGQ",
+        "value": "give some suggestion"
+      }
+    ],
+    "lang": "en",
+    "llm_model": "bge-large-zh",
+    "copy_count": 2,
+    "is_official": true,
+    "is_store": false,
+    "tag_id": 4,
+    "release_version": "chatflow_20250516170541569435_001",
+    "store_version": "chatflow_20250222003042441979_002",
+    "release_time": "2025-02-22 00:31:54",
+    "release_user": 211
+  },
+  "entities": [],
+  "lang": "en",
+  "variables": [
+    {
+      "variable_name": "delay",
+      "type": "text",
+      "description": "",
+      "from_node": "59b0be9a-6941-4ddd-a9f4-aa04fad62a19",
+      "lang": "en"
+    },
+    {
+      "variable_name": "journeyIntent",
+      "type": "text",
+      "description": "",
+      "from_node": "59b0be9a-6941-4ddd-a9f4-aa04fad62a19",
+      "lang": "en"
+    },
+    {
+      "variable_name": "last_user_response",
+      "type": "text",
+      "description": "",
+      "from_node": "b76de34b-b7c3-4c6c-821f-b68ab958c7a9",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_11",
+      "type": "text",
+      "description": "",
+      "from_node": "8322ccba-e079-4e14-a2d2-94b208eb9b6b",
+      "lang": "en"
+    },
+    {
+      "variable_name": "intent",
+      "type": "text",
+      "description": "",
+      "from_node": "529d371c-d21c-4b9d-a17d-7eb2b2b6748f",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_12",
+      "type": "text",
+      "description": "",
+      "from_node": "8d7bae73-0730-4622-9962-5643b4a30a23",
+      "lang": "en"
+    },
+    {
+      "variable_name": "DE_AccountName",
+      "type": "text",
+      "description": "",
+      "from_node": "6c0627fa-b1b8-4664-a9d9-930e15af94b5",
+      "lang": "en"
+    },
+    {
+      "variable_name": "SkillSet",
+      "type": "text",
+      "description": "",
+      "from_node": "54573df2-72c0-4dfb-b163-c018e6499fa4",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_14",
+      "type": "text",
+      "description": "",
+      "from_node": "d9c08eb1-7bbb-4760-8aba-96d4b55a7ce3",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_15",
+      "type": "text",
+      "description": "",
+      "from_node": "8b4a98d2-3a38-4795-b93f-f74489a1e375",
+      "lang": "en"
+    },
+    {
+      "variable_name": "DE_SavingAccount",
+      "type": "text",
+      "description": "",
+      "from_node": "49f12473-ff25-4865-99bb-935cc8b11b6d",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_17",
+      "type": "text",
+      "description": "",
+      "from_node": "3b556194-a95b-44cd-b3d8-02d78e2083ad",
+      "lang": "en"
+    },
+    {
+      "variable_name": "variable_18",
+      "type": "text",
+      "description": "",
+      "from_node": "fd2339fd-fa0d-4f30-b713-411aeec41505",
+      "lang": "en"
+    },
+    {
+      "variable_name": "DE_Mortgage",
+      "type": "text",
+      "description": "",
+      "from_node": "2580aa49-c5b2-4d4c-83a2-1e750da81b72",
+      "lang": "en"
+    },
+    {
+      "variable_name": "TXNAndSTMT_DownloadEstatement_DE_Mortgage",
+      "type": "text",
+      "description": "",
+      "from_node": "93b0f00b-3c18-46e9-ac8f-18a3c700d5d0",
+      "lang": "en"
+    }
+  ],
+  "categories": [],
+  "position": [
+    0,
+    0
+  ],
+  "zoom": 1,
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

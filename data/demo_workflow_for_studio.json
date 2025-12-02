@@ -1,0 +1,110 @@
+{
+  "created_by": "Claude Agent SDK",
+  "modified_by": "Claude Agent SDK",
+  "flow_uuid": "a378d7b7-63f1-4dde-a049-c96e43e62a73",
+  "start_node_uuid": "start00000000000000000000",
+  "intention_uuid": "33ef88c5-3db8-49b4-ae81-111204b007a2",
+  "flow_name": "customer_info_collection",
+  "description": "客户信息收集演示工作流",
+  "nodes": [
+    {
+      "id": "start00000000000000000000",
+      "type": "start",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 325
+      },
+      "data": {
+        "label": "Start",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right",
+        "sourceHandle": "96bcd621-ec99-4f0b-8134-db3219f4606c"
+      }
+    },
+    {
+      "id": "0db2a199-c101-458c-ae75-b3a3d5043bd0",
+      "type": "textReply",
+      "initialized": false,
+      "position": {
+        "x": 125,
+        "y": 525
+      },
+      "data": {
+        "sourceHandle": "ab691491-f44d-49ea-9b1d-78eca7f2ed6d",
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      },
+      "blockId": "5307fc82-195b-427d-98ae-6a8054d45a4d",
+      "hidden": true,
+      "config": {
+        "async_run": false,
+        "plain_text": [
+          {
+            "text": "询问用户姓名，获取姓名，询问用户邮箱地址，捕获邮箱，发送感谢信息",
+            "id": "61aba46e-ea1f-45fa-a657-43c85de654fc"
+          }
+        ],
+        "rich_text": [],
+        "title": "Response_1"
+      }
+    },
+    {
+      "id": "5307fc82-195b-427d-98ae-6a8054d45a4d",
+      "type": "block",
+      "initialized": false,
+      "position": {
+        "x": 475,
+        "y": 475
+      },
+      "data": {
+        "label": "Response_1",
+        "include_node_ids": [
+          "0db2a199-c101-458c-ae75-b3a3d5043bd0"
+        ],
+        "showToolBar": false,
+        "targetPosition": "left",
+        "sourcePosition": "right"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "vueflow__edge-start0000000000000000000096bcd621-ec99-4f0b-8134-db3219f4606c-0db2a199-c101-458c-ae75-b3a3d5043bd00db2a199-c101-458c-ae75-b3a3d5043bd0",
+      "type": "custom",
+      "source": "start00000000000000000000",
+      "target": "0db2a199-c101-458c-ae75-b3a3d5043bd0",
+      "sourceHandle": "96bcd621-ec99-4f0b-8134-db3219f4606c",
+      "targetHandle": "0db2a199-c101-458c-ae75-b3a3d5043bd0",
+      "data": {
+        "hovering": false
+      },
+      "label": "",
+      "sourceX": 475,
+      "sourceY": 375,
+      "targetX": 125,
+      "targetY": 575,
+      "zIndex": 0,
+      "animated": false
+    }
+  ],
+  "buttons": [],
+  "config": {},
+  "intention_info": {},
+  "entities": [],
+  "lang": "en",
+  "variables": [],
+  "categories": [],
+  "position": [
+    0,
+    0
+  ],
+  "zoom": 1,
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}
