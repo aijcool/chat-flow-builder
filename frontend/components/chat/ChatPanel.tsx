@@ -51,9 +51,9 @@ export function ChatPanel() {
   const handleFileClick = useCallback(async (filename: string) => {
     try {
       const data = await loadWorkflow(filename, userId || 'public')
-      setNodes(data.nodes)
-      setEdges(data.edges)
-      setVariables(data.variables)
+      setNodes(data.nodes || [])
+      setEdges(data.edges || [])
+      setVariables(data.variables || [])
       setCurrentFile(filename)
       // 刷新文件列表
       const files = await getWorkflowFiles(userId || 'public')

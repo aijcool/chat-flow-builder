@@ -44,67 +44,63 @@ class ChatflowAgent:
 
 【重要】不要使用 parse_workflow_description 工具！你应该自己理解用户需求并直接构造 steps 数组。
 
-## 构造 steps 数组示例:
-每个 step 需要包含 type 和对应的配置字段:
+## 节点类型和格式:
 - textReply: {"type": "textReply", "text": "消息内容", "title": "节点标题"}
 - captureUserReply: {"type": "captureUserReply", "variable": "变量名", "title": "节点标题"}
-- condition: {"type": "condition", "condition": "条件表达式", "variable": "变量名", "value": "值", "title": "节点标题"}
-- llmVariableAssignment: {"type": "llmVariableAssignment", "prompt": "提示词模板", "variable": "目标变量", "title": "节点标题"}
+- llmVariableAssignment: {"type": "llmVariableAssignment", "prompt": "提示词模板,使用{{变量名}}引用变量", "variable": "目标变量", "title": "节点标题"}
+- condition: {"type": "condition", "variable": "要判断的变量名", "operator": "=", "value": "期望值", "condition_name": "条件名称", "title": "节点标题"}
 - llMReply: {"type": "llMReply", "prompt": "提示词模板", "title": "节点标题"}
 - code: {"type": "code", "code": "代码内容", "title": "节点标题"}
 
-## 修改现有工作流流程:
-1. 用户说要修改某个工作流
-2. 调用 list_workflow_files 查看可用文件
-3. 调用 load_workflow_from_file 加载工作流
-4. 根据用户需求调用 update_workflow_node / add_node_to_workflow / delete_node_from_workflow
-5. 告知用户修改结果
+## 【核心设计模式 - 必须严格遵循】
 
-## 重要设计模式 - LLM 变量提取:
+### 模式1: 用户输入处理三连
+每次收集用户输入时,必须按以下顺序生成3个节点:
+1. captureUserReply - 收集原始输入到变量 (如 raw_input)
+2. llmVariableAssignment - 立即用LLM提取/验证信息 (如 extracted_data)
+3. condition - 基于提取结果进行判断
 
-当需要从用户输入中提取结构化信息用于后续条件判断时,必须遵循以下模式:
+示例:
+```
+{"type": "textReply", "text": "请输入您的出发城市", "title": "询问出发城市"}
+{"type": "captureUserReply", "variable": "departure_raw", "title": "收集出发城市"}
+{"type": "llmVariableAssignment", "prompt": "从用户输入'{{departure_raw}}'中提取城市名称。如果是有效城市名返回城市名,否则返回'invalid'", "variable": "departure_city", "title": "提取出发城市"}
+{"type": "condition", "variable": "departure_city", "operator": "!=", "value": "invalid", "condition_name": "城市有效", "title": "验证出发城市"}
+```
 
-1. captureUserReply - 获取用户原始输入,存入变量如 user_input
-2. llmVariableAssignment - 使用 LLM 从原始输入提取结构化数据,存入新变量如 extracted_info
-3. condition - 基于 extracted_info 进行条件判断,而不是基于 user_input
+### 模式2: 条件判断必须有完整分支
+每个 condition 节点后必须处理两种情况:
+- 条件满足: 继续正常流程
+- 条件不满足:
+  - 使用 llMReply 智能提示用户错误原因
+  - 或者使用 textReply 提示重新输入
+  - 然后循环回到收集信息的节点(在实际连线时处理)
 
-示例流程:
-- 文本回复: "请输入您的出发地和目的地"
-- 获取用户输入: user_input
-- LLM 提取变量: 使用提示词 "从 {{user_input}} 中提取出发地和目的地,如果信息不完整返回 'incomplete',否则返回 JSON {from: xxx, to: xxx}"
-  -> 存入 travel_info
-- 条件判断: 检查 travel_info != "incomplete"
+### 模式3: 验证提示词格式
+llmVariableAssignment 的 prompt 必须:
+- 使用 {{变量名}} 格式引用之前的变量
+- 明确指定有效/无效的返回值格式
+- 示例: "分析{{user_input}},如果包含有效日期返回'YYYY-MM-DD'格式,否则返回'invalid'"
 
-这种模式确保:
-- 用户可以用自然语言输入
-- LLM 负责理解和结构化信息
-- 条件判断基于结构化数据,更加可靠
+## 完整流程示例 (机票预订):
+```
+1. textReply: "欢迎使用机票预订服务！请输入出发城市"
+2. captureUserReply: departure_raw
+3. llmVariableAssignment: 从{{departure_raw}}提取城市 -> departure_city
+4. condition: departure_city != "invalid"
+5. textReply (条件不满足时): "抱歉,未能识别城市名,请重新输入"
+6. textReply (条件满足时): "请输入目的城市"
+7. captureUserReply: destination_raw
+8. llmVariableAssignment: 从{{destination_raw}}提取城市 -> destination_city
+9. condition: destination_city != "invalid"
+...以此类推
+```
 
-## 错误处理和循环回退:
-
-当验证失败时(信息不完整、格式错误等),应该:
-1. 使用 llMReply 节点智能提示用户缺少什么信息
-2. 将流程循环回到对应的 captureUserReply 节点让用户重新输入
-3. 不要让流程在错误分支处终止
-
-注意事项:
-- 保持友好和专业的语气
-- 主动澄清模糊的需求
-- 【重要】当工作流生成并保存成功后,你的回复必须非常简洁,只包含:
-  1. 成功提示
-  2. 文件名 (用方括号包围,如 [flight_booking.json])
-  3. 简短的描述 (一句话)
-  示例回复: "✅ 已生成工作流 [flight_booking.json]，包含完整的机票预订流程。点击文件名可在右侧画布查看。"
-- 【禁止】绝对不要在回复中输出 JSON 代码或工作流的详细结构
-- 如果遇到错误,友好地解释并建议解决方案
-
-支持的节点类型:
-- textReply: 发送文本消息
-- captureUserReply: 捕获用户输入
-- condition: 条件分支
-- code: 代码执行
-- llmVariableAssignment: LLM 提取变量 (重要: 用于从用户输入提取结构化数据)
-- llMReply: LLM 智能回复 (用于错误处理和动态响应)"""
+## 注意事项:
+- 【禁止】captureUserReply 后直接接 condition,必须先用 llmVariableAssignment 提取
+- 【禁止】condition 的 variable 使用原始输入变量,必须使用 LLM 提取后的变量
+- 【必须】每个验证失败的分支都要有提示信息
+- 当工作流生成成功后,回复只需包含: 成功提示 + [文件名.json] + 简短描述"""
 
     def __init__(
         self,
