@@ -48,6 +48,8 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "https://chatflow-tailor.pages.dev",
         "https://*.chatflow-tailor.pages.dev",
+        "https://chat-flow-builder.pages.dev",
+        "https://*.chat-flow-builder.pages.dev",
     ],
     allow_credentials=True,
     allow_methods=["*"],
